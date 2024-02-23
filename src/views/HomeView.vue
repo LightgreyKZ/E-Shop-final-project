@@ -1,21 +1,22 @@
 <template>
   <div class="home-container">
-    <vNavBar/>
-        <h1>It's home view</h1>
+    <Header />
+    <h1>It's home view</h1>
+    <Catalog />
   </div>
 </template>
 
 <script>
-import vNavBar from '../components/vNavBar.vue'
+import Header from "@/components/Header.vue";
+import Catalog from "../components/Catalog.vue";
 
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   components: {
-    vNavBar
-  }
-}
-
+    Header,
+    Catalog,
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

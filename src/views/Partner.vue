@@ -1,16 +1,12 @@
 <template>
-    <router-view />
+  <h3>Partner</h3>
 </template>
 
 <script>
-
-
 export default {
-  name: 'App'
+  name: "Partner"
 };
 </script>
 
-<style scoped>
-
-
+<style>
 </style>

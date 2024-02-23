@@ -1,21 +1,24 @@
 <template>
     <nav>
         <div class="header-box">
-            <div class="header_box_item"><a href="index.html" title="Домой" target="_blank"><img src="#" alt="Home" class="home"></a>
-                <div class="flex_for_spotify">Spotify</div>
-            </div>
             <div class="header_box_item"></div>
             <div class="header_box_item"></div>
-            <div class="header_box_item hide"><a href="#">Premium</a></div>
-            <div class="header_box_item hide"><a href="#">Support</a></div>
-            <div class="header_box_item hide"><a href="#">Download</a></div>
+            <div class="header_box_item"><router-link to="/">Продукция</router-link></div>
+            <div class="header_box_item"><router-link to="/partner">Стать партнером</router-link></div>
+            <div class="header_box_item"><router-link to="/about">О проекте</router-link></div>
+            <div class="header_box_item"></div>
+            <div class="header_box_item"></div>
             <div class="header_box_item"><a href="#">Sign Up</a></div>
             <div class="header_box_item"><a href="#">Log In</a></div>
+
         </div>
     </nav>
 </template>
 
 <script>
+    export default {
+    name: 'Header'
+    }
 
 </script>
 
@@ -26,6 +29,8 @@
     background-color: #000000;
     border-radius: 5px;
     padding: 5px 30px 5px 30px;
+    margin: 0 auto;
+    width: 1280px;
     height: 8rem;
     align-items: center;
     justify-content: center;
