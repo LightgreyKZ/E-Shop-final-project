@@ -1,14 +1,32 @@
 <template>
+  <button @click="loadGoods">Получить товары</button>
+  <p>{{ goods.gotGoods.length }}</p>
+  <p>{{ goods.isLoading }}</p>
   <div class="catalog">
+    <div v-if="goods.isLoading" class="goodsCard" v-for="good in goods.gotGoods" :key="good.id">
+        {{ good.title }}
+    </div>
 
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: "Catalog"
+  name: "Catalog",
+  computed: {
+    ...mapState(['goods'])
+  },
+  methods: {
+    ...mapActions('goods',['getGoods']), 
+    loadGoods() {
+      this.getGoods();
+    }
+  }
 };
 </script>
+
 
 <style>
 
