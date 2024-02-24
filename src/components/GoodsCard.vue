@@ -2,7 +2,10 @@
     <div class="goodsCard">
         <img src="{{ imgsrc }}" alt="{{ title }}">
         <h3>{{ title }}</h3>
-        
+        <slot name="instock"></slot>
+        <slot name="discount"></slot>
+        <p>{{ price }}</p>
+        <p>{{ category }}</p>
     </div>
     <!-- <div :class="SetClass" class = 'goodsCard' >
         <span class="cross" @click="delTask">✖</span>
