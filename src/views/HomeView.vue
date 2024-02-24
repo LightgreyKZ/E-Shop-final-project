@@ -3,6 +3,7 @@
     <Header />
     <h1>It's home view</h1>
     <Catalog />
+    
   </div>
 </template>
 

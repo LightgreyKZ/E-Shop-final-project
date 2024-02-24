@@ -40,6 +40,9 @@ export default {
   background-color: rgb(38, 74, 74);
 }
 
+.goodsCard {
+    border: 1px solid red;
+}
 
 
 </style>
