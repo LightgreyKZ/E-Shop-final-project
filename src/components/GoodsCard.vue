@@ -136,14 +136,13 @@ export default {
   opacity: 0;
 }
 
-button {
+/* button {
     border: 1px solid #63a0f5;
     border-radius: 5px;
     padding: 10px 15px;
     background-color: #63a0f5;
     color: #ffffff;
-    /* font-weight: bold; */
-  }
+  } */
 
 
 </style>
