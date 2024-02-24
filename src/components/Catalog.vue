@@ -12,6 +12,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import vGoodsCard from './GoodsCard.vue';
 
 export default {
   name: "Catalog",
@@ -23,6 +24,9 @@ export default {
     loadGoods() {
       this.getGoods();
     }
+  },
+  components: {
+    vGoodsCard
   }
 };
 </script>
@@ -39,7 +43,5 @@ export default {
   margin: 0 auto;
   background-color: rgb(38, 74, 74);
 }
-
-
 
 </style>

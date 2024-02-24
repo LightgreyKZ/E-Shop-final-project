@@ -10,7 +10,6 @@
             <div class="header_box_item"></div>
             <div class="header_box_item"><a href="#">Sign Up</a></div>
             <div class="header_box_item"><a href="#">Log In</a></div>
-
         </div>
     </nav>
 </template>
@@ -22,7 +21,7 @@
 
 </script>
 
-<style>
+<style scoped>
 /* Стиль для контейнера шапки */
 .header-box {
     display: flex;

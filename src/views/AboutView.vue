@@ -1,15 +1,19 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="about-container">
+    <vHeader />
+    <h3>About</h3>
   </div>
 </template>
 
-<style>
-/* @media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-} */
-</style>
+<script>
+import vHeader from "@/components/Header.vue";
+
+export default {
+  name: "About",
+  components: {
+    vHeader
+  },
+};
+</script>
+
+<style></style>

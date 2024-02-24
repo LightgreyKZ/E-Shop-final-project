@@ -1,22 +1,32 @@
 <template>
   <div class="home-container">
-    <Header />
-    <h1>It's home view</h1>
-    <Catalog />
+    <header>
+      <vHeader />
+      <h3>It's home view</h3>
+    </header>
+    <main>
+      <vCatalog />
+    </main>
+    <footer>
+      <!-- Здесь контент подвала -->
+    </footer>
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Catalog from "../components/Catalog.vue";
+import vHeader from "@/components/Header.vue";
+import vCatalog from "../components/Catalog.vue";
 
 export default {
   name: "HomeView",
   components: {
-    Header,
-    Catalog,
+    vHeader,
+    vCatalog,
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+
+
+</style>
