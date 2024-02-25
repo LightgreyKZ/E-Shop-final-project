@@ -1,9 +1,18 @@
 <template>
-  <button @click="loadGoods">Отобразить скидки</button>
+  <select v-model="SelectedCategory" @change="filterGoods(SelectedCategory)">
+    <option v-for="item in getDistinctCategory" >{{ item }}</option>
+  </select>
+  <span>{{ SelectedCategory }}</span>
+  <!-- <input type="text" v-model="userName" placeholder="Имя"> -->
+  <button @click="filterGoods(SelectedCategory)">Фильтровать массив</button>
+
   <p>Length: {{ goods.gotGoods.length }}</p>
   <p>isLoading: {{ goods.isLoading }}</p>
   <div class="catalog">
-    <vGoodsCard v-if="goods.isLoading" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
+    <vGoodsCard v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
+
+    </vGoodsCard>
+    <vGoodsCard v-if="goods.isLoading" v-show="filteredArray.length != 0" v-for="goods in filteredArray" :key="goods.id" :products="goods" >
 
     </vGoodsCard>
 
@@ -16,19 +25,32 @@ import vGoodsCard from './GoodsCard.vue';
 
 export default {
   name: "Catalog",
+  data() {
+    return {
+        SelectedCategory: '',
+        filteredArray: []
+    }
+  },
   computed: {
-    ...mapState(['goods'])
+    ...mapState(['goods']),
+    // получаем список категорий для фильтра
+    getDistinctCategory() {
+        const DistinctCategory = new Set(this.goods.gotGoods.map(item => item.category));
+        const CategoryList = Array.from(DistinctCategory);
+        return CategoryList;
+    }
   },
   methods: {
     ...mapActions('goods',['getGoods','getDiscounts']), 
     loadGoods() {
       this.getDiscounts();
+    },
+    filterGoods(category) {
+        const result = this.goods.gotGoods.filter(item => item.category === category);
+        console.log(result);
+        this.filteredArray = result;
     }
-    // GetPathOfImg(id) {
-    //         let imgPath = this.goods.gotGoods.find((item,i) => i == id).image;
-    //         return imgPath;
-    //         console.log(imgPath);
-    //     }
+ 
   },
   components: {
     vGoodsCard

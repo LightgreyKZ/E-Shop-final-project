@@ -1,4 +1,4 @@
-const BASE_CATALOG_URL = 'https://fakestoreapi.com/products?limit=9';
+const BASE_CATALOG_URL = 'https://fakestoreapi.com/products';
 const BASE_DISCOUNTS_URL = 'http://localhost:3000/discounts';
 
 export default {
