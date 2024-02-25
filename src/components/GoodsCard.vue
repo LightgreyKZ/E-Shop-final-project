@@ -1,11 +1,16 @@
 <template>
-    <div class="goodsCard">
-        <img src="{{ imgsrc }}" alt="{{ title }}">
-        <h3>{{ title }}</h3>
-        <slot name="instock"></slot>
-        <slot name="discount"></slot>
-        <p>{{ price }}</p>
-        <p>{{ category }}</p>
+    <div class="goodsCard" >
+        <div class="cardImage" :style="backgroundImage" ></div>
+        <div class="cardInfo">
+            <h3 class="cardTitle">{{ products.title }}</h3>
+            <div class="addinfo">
+                <slot name="instock"></slot>
+                <slot name="discount"></slot>
+            
+            <p class="cardPrice">{{ products.price }}</p>
+            <p class="cardCategory">{{ products.category }}</p> 
+            </div>
+        </div>
     </div>
     <!-- <div :class="SetClass" class = 'goodsCard' >
         <span class="cross" @click="delTask">✖</span>
@@ -25,32 +30,16 @@
 export default {
     data() {
         return {
-            ischeck: false,
-            isDetails: false
+            backgroundImage: `background-image: url('${this.products.image}')`
         }
     },
-    props: ['addinfo','imgsrc','title','price','category'],
+    props: ['addinfo','products','imgpath'],
     methods: {
-        // delTask() {
-        //     this.$emit('del', this.index);
-        // },
-        // SetStatus() {
-        //     this.$emit('sendStatus', this.ischeck, this.index);
-        // },
-        // showDetails() {
-        //   this.isDetails = !this.isDetails;
-        // }
     },
     computed: {
-        // SetClass: function() {
-        //     return {
-        //         'taskcardYellow'    : this.index%2 === 0,
-        //         'taskcardPink'      : this.index%2 === 1,
-        //         'finished'          : this.iscompleted
-        //     }
-        // }
     }
 }
+
 
 </script>
 
@@ -61,88 +50,35 @@ export default {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  background-color: coral;
+  height: 100%;
+  /* background-color: coral; */
 }
 
-.cardCommon:hover {
-  transform: rotate(-3deg);  
+.cardImage {
+  display: block; 
+  width: 100%; 
+  height: 60%;  
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  transition: 0.4s;
 }
 
-.taskcardYellow {
-  background: rgba(255, 251, 14, 0.97);
-  transform: rotate(3deg);
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    height: 40%;
+    border: 1px solid salmon;
 }
 
-.taskcardPink {
-  background: rgba(239, 155, 238, 0.97);
-  transform: rotate(-2.5deg);
+.cardImage:hover {
+  transform: scale(1.03); 
+  cursor: grabbing; 
 }
 
-.finished {
-  background:rgba(0, 189, 41, 0.97);
-  transform: rotate(0);
-}
-
-/* Стили для крестика */
-.cross {
-  position: absolute;
-  top: 3px;
-  right: 5px;
-  cursor: pointer;
-}
-.checkbox {
-  position: relative;
-  bottom: 3px;
-  left: 5px;
-  cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
-  margin: 15px;
-  transform:scale(1.3);
-  opacity:0.9;
-}
-
-.details {
-    display: block;
-    background-color: rgb(9, 190, 130);
-    position: absolute;
-    padding-left: 10px;
-    padding-top: 10px;
-    height: 200px;
-    width: 600px;
-    margin-top: -100px;
-    margin-left: -300px;
-    top: 50%;
-    left: 50%;
-    border: 1PX solid rgb(40, 40, 40);
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6), 10px 10px 70px rgba(0, 0, 0, 0.6);
-    z-index: 1;
-    
-}
-
-.details:hover {
-  /* тут я пытался придумать как сделать так, чтобы когда нажимаешь на нескольких карточках на Details каждое окно показывалось со смещением относительно предыдущего
-  но не придумал, оставил просто hover :^) */
-  transform:  translate(0, -5px); 
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-/* button {
-    border: 1px solid #63a0f5;
-    border-radius: 5px;
-    padding: 10px 15px;
-    background-color: #63a0f5;
-    color: #ffffff;
-  } */
 
 
 </style>

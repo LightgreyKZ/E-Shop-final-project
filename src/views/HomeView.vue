@@ -21,7 +21,7 @@ export default {
   name: "HomeView",
   components: {
     vHeader,
-    vCatalog,
+    vCatalog
   },
 };
 </script>

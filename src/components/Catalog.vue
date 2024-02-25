@@ -1,11 +1,11 @@
 <template>
-  <button @click="loadGoods">Получить товары</button>
-  <p>{{ goods.gotGoods.length }}</p>
-  <p>{{ goods.isLoading }}</p>
+  <button @click="loadGoods">Отобразить скидки</button>
+  <p>Length: {{ goods.gotGoods.length }}</p>
+  <p>isLoading: {{ goods.isLoading }}</p>
   <div class="catalog">
-    <div v-if="goods.isLoading" class="goodsCard" v-for="good in goods.gotGoods" :key="good.id">
-        {{ good.title }}
-    </div>
+    <vGoodsCard v-if="goods.isLoading" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
+
+    </vGoodsCard>
 
   </div>
 </template>
@@ -20,13 +20,21 @@ export default {
     ...mapState(['goods'])
   },
   methods: {
-    ...mapActions('goods',['getGoods']), 
+    ...mapActions('goods',['getGoods','getDiscounts']), 
     loadGoods() {
-      this.getGoods();
+      this.getDiscounts();
     }
+    // GetPathOfImg(id) {
+    //         let imgPath = this.goods.gotGoods.find((item,i) => i == id).image;
+    //         return imgPath;
+    //         console.log(imgPath);
+    //     }
   },
   components: {
     vGoodsCard
+  },
+  mounted() {
+    this.getGoods();
   }
 };
 </script>
@@ -37,11 +45,13 @@ export default {
 .catalog {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4, 451px);
+  grid-auto-rows: 451px;
+  /* grid-template-rows: repeat(4, 451px); */
   gap: 10px;
   width: 1280px;
   margin: 0 auto;
-  background-color: rgb(38, 74, 74);
+  border: 1px solid blue;
+  /* background-color: rgb(38, 74, 74); */
 }
 
 </style>

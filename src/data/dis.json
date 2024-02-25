@@ -1,0 +1,6 @@
+{  "discounts": [
+{ "percent": 2, "category": "men's clothing" },    
+{ "percent": 3, "category": "jewelery" },    
+{ "percent": 4, "category": "electronics" },
+{ "percent": 4, "category": "women's clothing" } 
+]}
