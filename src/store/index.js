@@ -1,9 +1,9 @@
-import { createStore } from 'vuex'
-import goods from './modules/goods'
+import { createStore } from "vuex";
+import goods from "./modules/goods";
 
 export default createStore({
   state: {
-    // counter: 20
+    cartArray: [],
   },
   getters: {
     // doubleCounter(state) {
@@ -27,6 +27,6 @@ export default createStore({
     // }
   },
   modules: {
-    goods
-  }
-})
+    goods,
+  },
+});

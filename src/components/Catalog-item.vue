@@ -10,8 +10,11 @@
             <p class="cardPrice">{{ products.price }}</p>
             <p class="cardCategory">{{ products.category }}</p> 
             </div>
+            
         </div>
+        <button class="addToCart" @click="addToCart()">ADD TO CART</button>
     </div>
+    
     <!-- <div :class="SetClass" class = 'goodsCard' >
         <span class="cross" @click="delTask">✖</span>
         <h4>{{ title }}</h4>
@@ -27,6 +30,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: "Catalog-item",
     data() {
@@ -34,10 +39,14 @@ export default {
             backgroundImage: `background-image: url('${this.products.image}')`
         }
     },
-    props: ['addinfo','products','imgpath'],
+    props: ['addinfo','products'],
     methods: {
+        addToCart() {
+            this.cartArray.push(this.products.id);
+        }
     },
     computed: {
+        ...mapState(['cartArray'])
     }
 }
 
@@ -52,6 +61,7 @@ export default {
   justify-content: start;
   align-items: start;
   height: 100%;
+  border: 1px solid rgb(255, 53, 30);
   /* background-color: coral; */
 }
 
@@ -72,7 +82,7 @@ export default {
     justify-content: space-between;
     align-items: start;
     height: 40%;
-    border: 1px solid salmon;
+    /* border: 1px solid salmon; */
 }
 
 .cardImage:hover {
@@ -80,6 +90,9 @@ export default {
   cursor: grabbing; 
 }
 
+.addToCart {
+    color: white;
+}
 
 
 </style>
