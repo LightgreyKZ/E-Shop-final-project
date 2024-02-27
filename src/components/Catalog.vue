@@ -9,19 +9,19 @@
   <p>Length: {{ goods.gotGoods.length }}</p>
   <p>isLoading: {{ goods.isLoading }}</p>
   <div class="catalog">
-    <vGoodsCard v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
+    <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
 
-    </vGoodsCard>
-    <vGoodsCard v-if="goods.isLoading" v-show="filteredArray.length != 0" v-for="goods in filteredArray" :key="goods.id" :products="goods" >
+    </vCatalogItem>
+    <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length != 0" v-for="goods in filteredArray" :key="goods.id" :products="goods" >
 
-    </vGoodsCard>
+    </vCatalogItem>
 
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import vGoodsCard from './GoodsCard.vue';
+import vCatalogItem from './Catalog-item.vue';
 
 export default {
   name: "Catalog",
@@ -53,7 +53,7 @@ export default {
  
   },
   components: {
-    vGoodsCard
+    vCatalogItem
   },
   mounted() {
     this.getGoods();

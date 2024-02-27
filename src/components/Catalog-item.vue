@@ -28,6 +28,7 @@
 
 <script>
 export default {
+    name: "Catalog-item",
     data() {
         return {
             backgroundImage: `background-image: url('${this.products.image}')`

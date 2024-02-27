@@ -1,15 +1,23 @@
 <template>
     <nav>
         <div class="header-box">
-            <div class="header_box_item"></div>
+            <div class="header_box_item">Дари добро</div>
+            <div class="header_box_item">Beeline</div>
             <div class="header_box_item"></div>
             <div class="header_box_item"><router-link to="/">Продукция</router-link></div>
             <div class="header_box_item"><router-link to="/partner">Стать партнером</router-link></div>
             <div class="header_box_item"><router-link to="/about">О проекте</router-link></div>
             <div class="header_box_item"></div>
             <div class="header_box_item"></div>
-            <div class="header_box_item"><a href="#">Sign Up</a></div>
-            <div class="header_box_item"><a href="#">Log In</a></div>
+            <div class="header_box_item">
+                <button class="header_box_item_button">Search</button>
+                <button class="header_box_item_button">Profile</button>
+                <router-link to="/cart">
+                <button class="header_box_item_button">
+                    <img src="../components/icons/icon_cart.png" alt="cart_icon">
+                </button>
+                </router-link>
+            </div>
         </div>
     </nav>
 </template>
@@ -30,9 +38,9 @@
     padding: 5px 30px 5px 30px;
     margin: 0 auto;
     width: 1280px;
-    height: 8rem;
+    height: 6rem;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 
 /* Стиль для элемента шапки */
@@ -43,20 +51,19 @@
     /* border: 1px solid red; */
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     font-weight: bold;
     /* flex-grow: 1; */
 }
 
 /* Разные кастомизации для элементов шапки */
-.header_box_item:nth-child(6) {
-    border-right: 3px solid white;
-}
 .header_box_item:nth-child(1) {
-    gap: 1rem;
-    /* padding-top: 1rem; */
-    font-size: 3rem;
+    border-right: 2px solid grey;
 }
+/* .header_box_item:nth-child(1) {
+    gap: 1rem;
+    font-size: 3rem;
+} */
 
 .header-box a:hover {
     color: rgb(27, 230, 0);
