@@ -32,6 +32,7 @@ export default {
         }
     },
     actions: {
+        //Основной запрос по товарам
         async getGoods({ commit }) {
             try {
                 const data = await fetch(BASE_CATALOG_URL);
@@ -43,6 +44,7 @@ export default {
               }
 
         },
+        //Запрос по скидкам
         async getDiscounts({commit}) {
             try {
                 const dataDis = await fetch(BASE_DISCOUNTS_URL);

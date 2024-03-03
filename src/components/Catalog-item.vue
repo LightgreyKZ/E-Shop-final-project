@@ -12,7 +12,7 @@
             </div>
             
         </div>
-        <button class="addToCart" @click="addToCart()">ADD TO CART</button>
+        <button class="addToCart" @click="add_To_Cart()">ADD TO CART</button>
     </div>
     
     <!-- <div :class="SetClass" class = 'goodsCard' >
@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+
 
 export default {
     name: "Catalog-item",
@@ -41,8 +42,9 @@ export default {
     },
     props: ['addinfo','products'],
     methods: {
-        addToCart() {
-            this.cartArray.push(this.products.id);
+        ...mapActions(['addToCart']),
+        add_To_Cart() {
+            this.addToCart({...this.products, quantity: 1});
         }
     },
     computed: {

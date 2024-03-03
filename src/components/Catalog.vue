@@ -4,7 +4,7 @@
   </select>
   <span>{{ SelectedCategory }}</span>
   <!-- <input type="text" v-model="userName" placeholder="Имя"> -->
-  <button @click="filterGoods(SelectedCategory)">Фильтровать массив</button>
+  <button @click="resetFilter()">Сбросить фильтры</button>
 
   <p>Length: {{ goods.gotGoods.length }}</p>
   <p>isLoading: {{ goods.isLoading }}</p>
@@ -50,6 +50,9 @@ export default {
         const result = this.goods.gotGoods.filter(item => item.category === category);
         console.log(result);
         this.filteredArray = result;
+    },
+    resetFilter() {
+        this.filteredArray.splice(0,this.filteredArray.length);
     }
  
   },

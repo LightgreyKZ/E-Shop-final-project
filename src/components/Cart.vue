@@ -1,10 +1,8 @@
 <template>
     <div>This is cart component</div>
-    <vCartItem />
-    <vCartItem />
-    <vCartItem />
-    <vCartItem />
-    <p>{{ cartArray }}</p>
+    <!-- Отрисовываем элементы корзины -->
+    <vCartItem v-for="item in cartArray" :key="item.id" :cartItemArray="item"> 
+    </vCartItem>
 </template>
 
 <script>

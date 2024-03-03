@@ -12,6 +12,7 @@
             <div class="header_box_item">
                 <button class="header_box_item_button">Search</button>
                 <button class="header_box_item_button">Profile</button>
+                <p>{{ cartGetter.length }}</p>
                 <router-link to="/cart">
                 <button class="header_box_item_button">
                     <img src="../components/icons/icon_cart.png" alt="cart_icon">
@@ -23,8 +24,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
     export default {
-    name: 'Header'
+    name: 'Header',
+    computed: {
+        ...mapGetters(['cartGetter'])
+    }
     }
 
 </script>

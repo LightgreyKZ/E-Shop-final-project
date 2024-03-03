@@ -1,8 +1,8 @@
 <template>
     <div class="cart_item">
-        <div class="cart_item__img"></div>
-        <div class="cart_item__description"></div>
-        <div class="cart_item__actions"></div>
+        <div class="cart_item__img" :style="backgroundImage"></div>
+        <div class="cart_item__description">{{ cartItemArray.description }}</div>
+        <div class="cart_item__actions">{{ cartItemArray.quantity }}</div>
     </div>
 </template>
 
@@ -11,9 +11,21 @@ export default {
     name: "Cart-item",
     data() {
         return {
-
+            backgroundImage: `background-image: url('${this.cartItemArray.image}')`
         }
-    }
+    },
+    props: ['cartItemArray'],
+    mounted() {
+     
+    //  this.cartItemArray.quantity = 1;
+     console.log('Я смонтирован!');
+    // Копируем объекты из массива productsFromParent и добавляем поле "количество"
+        // const cartItemArrayLocal = this.cartItemArray.map((product) => ({
+        // ...product,
+        // quantity: 0,
+        // }));
+        // console.log(cartItemArrayLocal);
+  },
 }
 
 
@@ -31,8 +43,12 @@ export default {
     &__img {
         display: block;
         background-color: aquamarine;
+        background-position: top;
+        background-size: cover;
+        background-repeat: no-repeat;
         width: 10rem;
         height: 9rem;
+        
     }
     &__description {
         display: block;
