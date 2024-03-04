@@ -12,7 +12,7 @@
             </div>
             
         </div>
-        <button class="addToCart" @click="add_To_Cart()">ADD TO CART</button>
+        <button class="addToCart" @click="add_To_Cart()">+</button>
     </div>
     
     <!-- <div :class="SetClass" class = 'goodsCard' >
@@ -44,6 +44,7 @@ export default {
     methods: {
         ...mapActions(['addToCart']),
         add_To_Cart() {
+            //над этим просидел часов 5: (чтобы добавить кол-во в корзину)
             this.addToCart({...this.products, quantity: 1});
         }
     },
@@ -92,9 +93,25 @@ export default {
   cursor: grabbing; 
 }
 
+
 .addToCart {
-    color: white;
+    width: 3rem;
+    height: 2rem;
+    background-color: rgb(165, 165, 165);
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+    border: none;
 }
+
+.addToCart:hover {
+  transform: scale(1.05); 
+  background-color: red;
+  color: white;
+}
+
+
 
 
 </style>
