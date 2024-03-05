@@ -38,6 +38,9 @@ export default createStore({
         state.cartArray.push(payload);
       }
     },
+    DEL_FROM_CART(state, payload) {
+      state.cartArray.splice(state.cartArray.findIndex((item) => item.id === payload.id),1)
+    },
     ADD_TO_FAV(state, payload) {
       if (state.favArray.length) {
         let isExistsFav = false;
@@ -71,6 +74,9 @@ export default createStore({
   actions: {
     addToCart({commit}, payload) {
       commit('ADD_TO_CART', payload)
+    },
+    delFromCart({commit}, payload) {
+      commit('DEL_FROM_CART', payload)
     },
     addToFav({commit}, payload) {
       commit('ADD_TO_FAV', payload)

@@ -6,8 +6,8 @@
       <div class="cart_item__actions_price">{{ cartItemArray.price }}</div>
       <div class="cart_item__actions_discount">11000</div>
       <div class="cart_item__actions_bottom">
-        <div class="cart_item__actions-like" :class="GetFav" @click="addFavorite()">&#10084;</div>
-        <div class="cart_item__actions-delete">&#128465;</div>
+        <div class="cart_item__actions-like" :class="GetFavStatus" @click="addFavorite()">&#10084;</div>
+        <div class="cart_item__actions-delete" @click="delItemFromCart()">&#128465;</div>
         <div class="cart_item__actions-buttons"></div>
       </div>
     </div>
@@ -29,9 +29,9 @@ export default {
   computed: {
     //импортируем массив из стора, чтобы работало добавление в избранное
     ...mapState(['favArray']),
-    GetFav() {
+    GetFavStatus() {
             return {
-                'liked'             : this.isFavorite == true
+                'liked' : this.isFavorite == true
             }
         }
   },
@@ -49,7 +49,11 @@ export default {
   },
   methods: {
     //импортируем методы из стора, чтобы работало добавление в избранное
-    ...mapActions(['addToFav','delFav']),
+    ...mapActions(['addToFav','delFav','delFromCart']),
+    delItemFromCart() {
+      //наверное проще уже индекс передать из Cart.vue, пока так оставлю
+      this.delFromCart({id: this.cartItemArray.id})
+    },
     addFavorite() {
       //реализовал переключение между статусами в избранном/удаление из избранного
       this.isFavorite = !this.isFavorite;
