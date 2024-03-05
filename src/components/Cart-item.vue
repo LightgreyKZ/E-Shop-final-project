@@ -8,7 +8,11 @@
       <div class="cart_item__actions_bottom">
         <div class="cart_item__actions-like" :class="GetFavStatus" @click="addFavorite()">&#10084;</div>
         <div class="cart_item__actions-delete" @click="delItemFromCart()">&#128465;</div>
-        <div class="cart_item__actions-buttons"></div>
+        <div class="cart_item__actions-buttons">
+          <button class="plus-minus-buttons" @click="decItemCart()" >&#8722;</button>
+          <span class="showed-quantity">{{ cartItemArray.quantity }}</span>
+          <button class="plus-minus-buttons" @click="add_To_Cart()">&#43;</button>
+        </div>
       </div>
     </div>
   </div>
@@ -49,7 +53,7 @@ export default {
   },
   methods: {
     //импортируем методы из стора, чтобы работало добавление в избранное
-    ...mapActions(['addToFav','delFav','delFromCart']),
+    ...mapActions(['addToCart','addToFav','delFav','delFromCart','decQuantityInCart']),
     delItemFromCart() {
       //наверное проще уже индекс передать из Cart.vue, пока так оставлю
       this.delFromCart({id: this.cartItemArray.id})
@@ -62,11 +66,15 @@ export default {
         this.addToFav({id: this.cartItemArray.id});
       }
       else {
-        this.delFav({id: this.cartItemArray.id});
+        this.delFav(this.cartItemArray);
       }
-       
-      
-      
+    },
+    add_To_Cart() {
+            //над этим просидел часов 5: (чтобы добавить кол-во в корзину)
+            this.addToCart(this.cartItemArray);
+    },
+    decItemCart() {
+      this.decQuantityInCart(this.cartItemArray);
     }
   }
 };
@@ -75,7 +83,7 @@ export default {
 <style lang="scss">
 .cart_item {
   display: flex;
-  width: 65rem;
+  width: 60rem;
   height: 10rem;
   align-items: center;
   justify-content: space-around;
@@ -86,18 +94,22 @@ export default {
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 10rem;
+    border-radius: 1rem;
+    width: 9rem;
     height: 9rem;
   }
   &__description {
     display: block;
     background-color: bisque;
-    width: 35rem;
+    padding: 0 10px;
+    width: 36rem;
     height: 9rem;
   }
   &__actions {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
     background-color: rgb(255, 191, 127);
     width: 15rem;
     height: 9rem;
@@ -111,8 +123,9 @@ export default {
     &_bottom {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       width: 100%;
-      background-color: brown;
+      // background-color: brown;
     }
     &-like {
       font-size: 2rem;
@@ -124,6 +137,12 @@ export default {
       color: rgb(255, 255, 255);
       transition: 0.2s;
     }
+    &-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      height: 100%;
+    }
     &-like:hover {
       color: red;
       cursor: pointer;
@@ -134,6 +153,15 @@ export default {
     }
   }
 }
+
+.plus-minus-buttons, .showed-quantity {
+  width: 50px;
+  height: 40px;
+  padding: 3px 15px 7px 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 
 .liked {
     color: red;

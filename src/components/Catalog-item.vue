@@ -13,6 +13,7 @@
             
         </div>
         <button class="addToCart" @click="add_To_Cart()">+</button>
+        <span v-if="isItemInCart(products.id)"> Товар в корзине </span>
     </div>
     
     <!-- <div :class="SetClass" class = 'goodsCard' >
@@ -31,7 +32,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-
+import { mapGetters } from 'vuex';
 
 export default {
     name: "Catalog-item",
@@ -49,7 +50,8 @@ export default {
         }
     },
     computed: {
-        ...mapState(['cartArray'])
+        ...mapState(['cartArray']),
+        ...mapGetters(['isItemInCart'])
     }
 }
 
@@ -103,6 +105,7 @@ export default {
     border-radius: 8px;
     transition: 0.3s;
     border: none;
+    display: inline;
 }
 
 .addToCart:hover {

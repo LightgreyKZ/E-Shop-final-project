@@ -1,10 +1,8 @@
 <template>
-    <div class="cart-container">
       <vHeader />
-      <h3>Cart</h3>
+      
       <vCart />
-    </div>
-  </template>
+</template>
   
   <script>
   import vCart from "@/components/Cart.vue";

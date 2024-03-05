@@ -4,11 +4,22 @@ import goods from "./modules/goods";
 export default createStore({
   state: {
     cartArray: [],
-    favArray: []
+    favArray: [],
   },
   getters: {
     cartGetter(state) {
       return state.cartArray;
+    },
+    isItemInCart(state) {
+      return function(itemid) {
+        const cartItemIndex = state.cartArray.findIndex((item) => item.id === itemid);
+        if (cartItemIndex !== -1) {
+          return true
+        }
+        else {
+          return false
+        }
+      }
     }
     // doubleCounter(state) {
     //   return state.counter * 2
@@ -18,6 +29,7 @@ export default createStore({
     // }
   },
   mutations: {
+    //ДОБАВЛЕНИЕ В КОРЗИНУ
     ADD_TO_CART(state, payload) {
       //Проверка на наличие уже такого товара в корзине
       if (state.cartArray.length) {
@@ -25,9 +37,9 @@ export default createStore({
         state.cartArray.map((item) => {
           if (item.id === payload.id) {
             isExists = true;
-            item.quantity++
+            item.quantity++;
           }
-        })
+        });
         //если такого товара ранее не было, то пушим
         if (!isExists) {
           state.cartArray.push(payload);
@@ -38,9 +50,30 @@ export default createStore({
         state.cartArray.push(payload);
       }
     },
+    //УДАЛЕНИЕ ИЗ КОРЗИНЫ
     DEL_FROM_CART(state, payload) {
-      state.cartArray.splice(state.cartArray.findIndex((item) => item.id === payload.id),1)
+      state.cartArray.splice(
+        state.cartArray.findIndex((item) => item.id === payload.id),
+        1
+      );
     },
+    //УМЕНЬШЕНИЕ СЧЕТЧИКА ТОВАРОВ В КОРЗИНЕ
+    DEC_QUANTITY_IN_CART(state, payload) {
+      const cartItemIndex = state.cartArray.findIndex(
+        (item) => item.id === payload.id
+      );
+
+      if (cartItemIndex !== -1) {
+        // Уменьшаем количество товара на 1
+        if (state.cartArray[cartItemIndex].quantity > 1) {
+          state.cartArray[cartItemIndex].quantity--;
+        } else {
+          // Если количество уже 1, удаляем товар из корзины
+          state.cartArray.splice(cartItemIndex, 1);
+        }
+      }
+    },
+    //ДОБАВЛЕНИЕ ТОВАРА В ИЗБРАННОЕ
     ADD_TO_FAV(state, payload) {
       if (state.favArray.length) {
         let isExistsFav = false;
@@ -49,44 +82,44 @@ export default createStore({
             isExistsFav = true;
             return {};
           }
-        })
+        });
         if (!isExistsFav) {
           state.favArray.push(payload);
         }
-      }
-      else {
+      } else {
         state.favArray.push(payload);
       }
     },
+    //УДАЛЕНИЕ ИЗ ИЗБРАННОГО
     DEL_FROM_FAV(state, payload) {
       //Удаляем элемент из избранного. Ищем индекс переданного в payload id и удаляем 1 элемент.
-      console.log(payload);
-      // console.log('Удаляем элемент с INDEX: '+ state.favArray.indexOf(payload.id));
-      state.favArray.splice(state.favArray.findIndex((item) => item.id === payload.id),1);
-    }
-    // decreaseCounter(state) {
-    //   state.counter--
-    // },
-    // incrementCounter(state, payload) {
-    //   state.counter = state.counter + payload.value
-    // }
+      state.favArray.splice(
+        state.favArray.findIndex((item) => item.id === payload.id),1
+        );
+    },
   },
   actions: {
-    addToCart({commit}, payload) {
-      commit('ADD_TO_CART', payload)
+    //ДОБАВЛЕНИЕ В КОРЗИНУ
+    addToCart({ commit }, payload) {
+      commit("ADD_TO_CART", payload);
     },
-    delFromCart({commit}, payload) {
-      commit('DEL_FROM_CART', payload)
+    //УДАЛЕНИЕ ИЗ КОРЗИНЫ
+    delFromCart({ commit }, payload) {
+      commit("DEL_FROM_CART", payload);
     },
-    addToFav({commit}, payload) {
-      commit('ADD_TO_FAV', payload)
+    //ДОБАВЛЕНИЕ ТОВАРА В ИЗБРАННОЕ
+    addToFav({ commit }, payload) {
+      commit("ADD_TO_FAV", payload);
     },
-    delFav({commit}, payload) {
-      commit('DEL_FROM_FAV', payload)
-    }
-    // incrementCounter(context, payload) {
-    //   context.commit('incrementCounter', payload)
-    // }
+    //УДАЛЕНИЕ ИЗ ИЗБРАННОГО
+    delFav({ commit }, payload) {
+      commit("DEL_FROM_FAV", payload);
+    },
+    //УМЕНЬШЕНИЕ СЧЕТЧИКА ТОВАРОВ В КОРЗИНЕ
+    //да, тут я уже понял, что лучше бы actions объявлял капсом, чтобы они заметнее были в компонентах..
+    decQuantityInCart({ commit }, payload) {
+      commit("DEC_QUANTITY_IN_CART", payload);
+    },
   },
   modules: {
     goods,
