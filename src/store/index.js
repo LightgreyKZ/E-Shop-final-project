@@ -38,7 +38,7 @@ export default createStore({
         state.cartArray.push(payload);
       }
     },
-    ADD_TO_FAV (state, payload) {
+    ADD_TO_FAV(state, payload) {
       if (state.favArray.length) {
         let isExistsFav = false;
         state.favArray.map((itemfav) => {
@@ -54,6 +54,12 @@ export default createStore({
       else {
         state.favArray.push(payload);
       }
+    },
+    DEL_FROM_FAV(state, payload) {
+      //Удаляем элемент из избранного. Ищем индекс переданного в payload id и удаляем 1 элемент.
+      console.log(payload);
+      // console.log('Удаляем элемент с INDEX: '+ state.favArray.indexOf(payload.id));
+      state.favArray.splice(state.favArray.findIndex((item) => item.id === payload.id),1);
     }
     // decreaseCounter(state) {
     //   state.counter--
@@ -68,6 +74,9 @@ export default createStore({
     },
     addToFav({commit}, payload) {
       commit('ADD_TO_FAV', payload)
+    },
+    delFav({commit}, payload) {
+      commit('DEL_FROM_FAV', payload)
     }
     // incrementCounter(context, payload) {
     //   context.commit('incrementCounter', payload)

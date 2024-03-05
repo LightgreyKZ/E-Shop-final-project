@@ -37,23 +37,32 @@ export default {
   },
   mounted() {
     //  this.cartItemArray.quantity = 1;
-    console.log('Before: ' + this.isFavorite);
+    // console.log('Before: ' + this.isFavorite);
     //ищем был ли добавлен элемент в избранное ранее
     const isFoundFav = this.favArray.find((item) => item.id === this.cartItemArray.id);
     if (isFoundFav) {
         this.isFavorite = true;
     }
-    console.log('After: ' + this.isFavorite);
+    // console.log('After: ' + this.isFavorite);
     // console.log(this.favArray);
     // console.log(this.favArray.includes('id: 18'));
   },
   methods: {
     //импортируем методы из стора, чтобы работало добавление в избранное
-    ...mapActions(['addToFav']),
+    ...mapActions(['addToFav','delFav']),
     addFavorite() {
-      //добавляем в стор инфу об id сразу со структурой в виде объекта  
-      this.addToFav({id: this.cartItemArray.id});
+      //реализовал переключение между статусами в избранном/удаление из избранного
       this.isFavorite = !this.isFavorite;
+      if (this.isFavorite) {
+        //добавляем в стор инфу об id сразу со структурой в виде объекта 
+        this.addToFav({id: this.cartItemArray.id});
+      }
+      else {
+        this.delFav({id: this.cartItemArray.id});
+      }
+       
+      
+      
     }
   }
 };
