@@ -87,10 +87,10 @@ export default {
   height: 10rem;
   align-items: center;
   justify-content: space-around;
-  background-color: antiquewhite;
+  border: 1px solid black;
   &__img {
     display: block;
-    background-color: aquamarine;
+    // background-color: aquamarine;
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -100,7 +100,7 @@ export default {
   }
   &__description {
     display: block;
-    background-color: bisque;
+    // background-color: bisque;
     padding: 0 10px;
     width: 36rem;
     height: 9rem;
@@ -110,7 +110,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: end;
-    background-color: rgb(255, 191, 127);
+    // background-color: rgb(255, 191, 127);
     width: 15rem;
     height: 9rem;
     &_price {
@@ -129,13 +129,21 @@ export default {
     }
     &-like {
       font-size: 2rem;
-      color: rgb(255, 255, 255);
+      color: grey;
       transition:0.5s ease-out;
     }
     &-delete {
+      display: flex;
+      justify-content: center; /* Центрирование по горизонтали */
+      align-items: center; /* Центрирование по вертикали */
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      // border: 1px solid grey;
       font-size: 2rem;
-      color: rgb(255, 255, 255);
+      color: grey;
       transition: 0.2s;
+
     }
     &-buttons {
       display: flex;
@@ -149,6 +157,7 @@ export default {
     }
     &-delete:hover {
       color: red;
+      background-color: rgba(211, 211, 211, 0.642);
       cursor: pointer;
     }
   }

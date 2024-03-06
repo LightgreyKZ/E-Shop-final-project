@@ -5,13 +5,16 @@
   <span>{{ SelectedCategory }}</span>
   <!-- <input type="text" v-model="userName" placeholder="Имя"> -->
   <button @click="resetFilter()">Сбросить фильтры</button>
+  <button @click="loadDiscounts()">Загрузить скидки</button>
 
   <p>Length: {{ goods.gotGoods.length }}</p>
   <p>isLoading: {{ goods.isLoading }}</p>
   <div class="catalog">
     <!-- подумать над v-show v-if -->
     <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
-
+      <!-- <template #instock>
+        <p>{{ goods.gotDiscounts[0].percent }}</p>
+      </template> -->
     </vCatalogItem>
     <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length != 0" v-for="goods in filteredArray" :key="goods.id" :products="goods" >
 
@@ -43,7 +46,7 @@ export default {
   },
   methods: {
     ...mapActions('goods',['getGoods','getDiscounts']), 
-    loadGoods() {
+    loadDiscounts() {
       this.getDiscounts();
     },
     filterGoods(category) {
@@ -53,7 +56,8 @@ export default {
     },
     resetFilter() {
         this.filteredArray.splice(0,this.filteredArray.length);
-    }
+    },
+
  
   },
   components: {
@@ -61,6 +65,7 @@ export default {
   },
   mounted() {
     this.getGoods();
+    this.loadDiscounts();
   }
 };
 </script>
@@ -77,7 +82,7 @@ export default {
   width: 1280px;
   margin: 0 auto;
   border: 1px solid blue;
-  /* background-color: rgb(38, 74, 74); */
+  background-color: rgb(234, 252, 255);
 }
 
 </style>

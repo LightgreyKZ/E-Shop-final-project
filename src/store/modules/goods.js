@@ -5,10 +5,28 @@ export default {
     namespaced: true,
     state: {
         gotGoods: [],   /* Основной массив данных */
-        gotDiscounts: [],
+        gotDiscounts: [], /* Массив со скидками */
         isLoading: false
     },
     getters: {
+        GET_DISCOUNT_BY_ID(state) {
+        return function(payload) {
+            //тут не строгое равенство, т.к. в dis.json значения id прописаны в строковом типе. 
+            const indexItem = state.gotDiscounts.findIndex((item) => item.id == payload); 
+                if (indexItem !== -1) {
+                return state.gotDiscounts[indexItem].percent
+                }
+            }
+        },
+        GET_INSTOCK_BY_ID(state) {
+            return function(payload) {
+                //тут не строгое равенство, т.к. в dis.json значения id прописаны в строковом типе. 
+                const indexItem = state.gotDiscounts.findIndex((item) => item.id == payload); 
+                if (indexItem !== -1) {
+                  return state.gotDiscounts[indexItem].stock  
+                }
+            }
+            }
     },
     mutations: {
         SET_GOODS(state, payload) {
@@ -30,6 +48,7 @@ export default {
             state.gotDiscounts = payload;
 
         }
+
     },
     actions: {
         //Основной запрос по товарам
@@ -55,5 +74,8 @@ export default {
                 console.error('Ошибка при получении списка скидок:', error);
             }
         }
+        // getDiscountsByCategory({commit}, payload) {
+        //     commit('GET_DISCOUNT_BY_CATEGORY', payload)
+        // }
     }
 }

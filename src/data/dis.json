@@ -1,6 +1,104 @@
-{  "discounts": [
-{ "percent": 2, "category": "men's clothing" },    
-{ "percent": 3, "category": "jewelery" },    
-{ "percent": 4, "category": "electronics" },
-{ "percent": 4, "category": "women's clothing" } 
-]}
+{
+    "discounts": [
+        {
+            "id": "1",
+			"stock": "yes",
+            "percent": 5
+        },
+        {
+            "id": "2",
+			"stock": "order0",
+            "percent": 3
+        },
+        {
+            "id": "3",
+			"stock": "yes",
+            "percent": 4
+        },
+        {
+            "id": "4",
+			"stock": "order34",
+            "percent": 4
+        },
+		{
+            "id": "5",
+			"stock": "yes",
+            "percent": 5
+        },
+        {
+            "id": "6",
+			"stock": "order12",
+            "percent": 3
+        },
+        {
+            "id": "7",
+			"stock": "yes",
+            "percent": 4
+        },
+        {
+            "id": "8",
+			"stock": "yes",
+            "percent": 4
+        },
+        {
+            "id": "9",
+			"stock": "order0",
+            "percent": 4
+        },
+        {
+            "id": "10",
+			"stock": "yes",
+            "percent": 4
+        },
+		{
+            "id": "11",
+			"stock": "yes",
+            "percent": 5
+        },
+        {
+            "id": "12",
+			"stock": "order0",
+            "percent": 3
+        },
+        {
+            "id": "13",
+			"stock": "yes",
+            "percent": 4
+        },
+        {
+            "id": "14",
+			"stock": "order12",
+            "percent": 4
+        },
+		{
+            "id": "15",
+			"stock": "yes",
+            "percent": 5
+        },
+        {
+            "id": "16",
+			"stock": "order12",
+            "percent": 3
+        },
+        {
+            "id": "17",
+			"stock": "yes",
+            "percent": 4
+        },
+        {
+            "id": "18",
+			"stock": "yes",
+            "percent": 4
+        },
+        {
+            "id": "19",
+			"stock": "order34",
+            "percent": 4
+        },
+        {
+            "id": "20",
+			"stock": "yes",
+            "percent": 4
+        }
+    ]
+}
