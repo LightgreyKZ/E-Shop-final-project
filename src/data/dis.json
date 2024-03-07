@@ -3,52 +3,52 @@
         {
             "id": "1",
 			"stock": "yes",
-            "percent": 5
+            "percent": 0
         },
         {
             "id": "2",
 			"stock": "order0",
-            "percent": 3
+            "percent": 0
         },
         {
             "id": "3",
 			"stock": "yes",
-            "percent": 4
+            "percent": 0
         },
         {
             "id": "4",
 			"stock": "order34",
-            "percent": 4
+            "percent": 0
         },
 		{
             "id": "5",
 			"stock": "yes",
-            "percent": 5
+            "percent": 0
         },
         {
             "id": "6",
 			"stock": "order12",
-            "percent": 3
+            "percent": 0
         },
         {
             "id": "7",
 			"stock": "yes",
-            "percent": 4
+            "percent": 5
         },
         {
             "id": "8",
 			"stock": "yes",
-            "percent": 4
+            "percent": 5
         },
         {
             "id": "9",
 			"stock": "order0",
-            "percent": 4
+            "percent": 5
         },
         {
             "id": "10",
 			"stock": "yes",
-            "percent": 4
+            "percent": 5
         },
 		{
             "id": "11",
@@ -58,17 +58,17 @@
         {
             "id": "12",
 			"stock": "order0",
-            "percent": 3
+            "percent": 0
         },
         {
             "id": "13",
 			"stock": "yes",
-            "percent": 4
+            "percent": 0
         },
         {
             "id": "14",
 			"stock": "order12",
-            "percent": 4
+            "percent": 0
         },
 		{
             "id": "15",
@@ -83,22 +83,22 @@
         {
             "id": "17",
 			"stock": "yes",
-            "percent": 4
+            "percent": 5
         },
         {
             "id": "18",
 			"stock": "yes",
-            "percent": 4
+            "percent": 5
         },
         {
             "id": "19",
 			"stock": "order34",
-            "percent": 4
+            "percent": 0
         },
         {
             "id": "20",
 			"stock": "yes",
-            "percent": 4
+            "percent": 0
         }
     ]
 }
