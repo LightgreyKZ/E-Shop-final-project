@@ -39,7 +39,7 @@ import { mapGetters } from 'vuex';
 /* Стиль для контейнера шапки */
 .header-box {
     display: flex;
-    background-color: #000000;
+    background-color: white;
     border-radius: 5px;
     padding: 5px 30px 5px 30px;
     margin: 0 auto;

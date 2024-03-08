@@ -10,6 +10,7 @@ export default createStore({
     cartGetter(state) {
       return state.cartArray;
     },
+    //Наличие в корзине
     isItemInCart(state) {
       return function(itemid) {
         const cartItemIndex = state.cartArray.findIndex((item) => item.id === itemid);
@@ -20,6 +21,13 @@ export default createStore({
           return false
         }
       }
+    },
+    //Сумма товаров в корзине
+    cartTotalSum(state) {
+      const totalSum = state.cartArray.reduce((sum,item) => {
+        return (sum + item.price * item.quantity);
+      },0);
+      return totalSum.toFixed(2);
     }
     // doubleCounter(state) {
     //   return state.counter * 2

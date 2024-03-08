@@ -82,7 +82,7 @@ export default {
   width: 1280px;
   margin: 0 auto;
   border: 1px solid blue;
-  background-color: rgb(234, 252, 255);
+  /* background-color: rgb(234, 252, 255); */
 }
 
 </style>

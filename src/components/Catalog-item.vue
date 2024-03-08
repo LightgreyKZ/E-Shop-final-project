@@ -5,33 +5,19 @@
       <h4 class="cardTitle">{{ products.title }}</h4>
       <p class="instock">{{ inStockOrder }}</p>
       <p class="oldPrice" v-if="percentDiscount">
-          <s>{{ products.price }}</s>
+          <s>{{ products.price }}&#36;</s>
         </p>
       <div class="addinfo">
         
         <p class="cardPrice" :class="{ redPrice: percentDiscount }">
-          {{ products.price }}
+            {{ products.price - (products.price * percentDiscount/100).toFixed(2) }}&#36;
         </p>
+        <span class="inCart" v-if="isInCart"> Товар в корзине </span>
         <button class="addToCart" @click="add_To_Cart()">+</button>
         <!-- <p v-if="percentDiscount">Процент скидки: {{ percentDiscount }} %</p> -->
       </div>
     </div>
-    
-    <span v-if="isInCart"> Товар в корзине </span>
   </div>
-
-  <!-- <div :class="SetClass" class = 'goodsCard' >
-        <span class="cross" @click="delTask">✖</span>
-        <h4>{{ title }}</h4>
-        <p>{{ desc }}</p>
-        <button @click="showDetails">Details</button><br>
-        <input type="checkbox" class="checkbox" v-model="ischeck" @change="SetStatus">Done!
-    </div>
-    <Transition>
-          <div class="details" v-if="isDetails" @click="showDetails">
-            <slot></slot>
-          </div>
-    </Transition> -->
 </template>
 
 <script>
@@ -111,6 +97,7 @@ export default {
   justify-content: space-between;
   align-items: start;
   height: 40%;
+  min-width: 100%;
   font-family: "Ubuntu", sans-serif;
   font-weight: 400;
   /* border: 1px solid salmon; */
@@ -119,6 +106,7 @@ export default {
 .addinfo {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
 }
@@ -127,13 +115,18 @@ export default {
     flex-grow: 1;
 }
 
+.inCart {
+    padding: 0 5px;
+    font-size: 0.9rem;
+}
+
 .cardPrice {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
 .redPrice {
-  color: red;
+  color: #DC2840;
 }
 
 .cardImage:hover {
@@ -144,20 +137,27 @@ export default {
 .addToCart {
   width: 3rem;
   height: 2rem;
-  background-color: rgb(165, 165, 165);
+  background-color: #ECECEC;
   color: black;
   font-weight: bold;
+  font-size:medium;
   border-radius: 8px;
-  transition: 0.3s;
+  transition: 0.4s;
   border: none;
   display: inline;
+  min-height: 100%;
   /* cursor: url("../components/icons/hand-pointer-svgrepo-com.svg"), auto; */
   cursor: url("../components/icons/free-icon-hand-cursor-5781771.png"), auto;
 }
 
 .addToCart:hover {
   transform: scale(1.05);
-  background-color: red;
+  background-color: #DC2840;
   color: white;
 }
+
+.addToCart:active {
+  background-color: rgb(2, 199, 2);
+}
+
 </style>
