@@ -26,7 +26,14 @@ export default {
                   return state.gotDiscounts[indexItem].stock  
                 }
             }
-            }
+            },
+        //суммарная скидка:
+        cartTotalDiscount(state, getters, rootState, rootGetters) {
+            const totalDiscount = rootState.cartArray.reduce((sum, item) => {
+                return (sum + (item.price * item.quantity * (getters.GET_DISCOUNT_BY_ID(item.id)/100)))
+            },0);
+            return totalDiscount;
+        }
     },
     mutations: {
         SET_GOODS(state, payload) {
@@ -68,7 +75,7 @@ export default {
             try {
                 const dataDis = await fetch(BASE_DISCOUNTS_URL);
                 const jsonDis = await dataDis.json();
-                console.log(jsonDis);
+                // console.log(jsonDis);
                 commit('SET_DISCOUNTS', jsonDis);
             } catch (error) {
                 console.error('Ошибка при получении списка скидок:', error);

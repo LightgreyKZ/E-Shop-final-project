@@ -7,18 +7,18 @@
                 <div>{{ totalSum }}&#36;</div>
             </div>
             <div class="order__details-delivery">
-                <div>Доставка:</div>
-                <div>{{ Math.ceil(totalSum * 0.01) }}&#36;</div>
+                <div data-tooltip="Рассчитывается как 1% от суммы заказа">Доставка:</div>
+                <div>{{ totalDelivery }}&#36;</div>
             </div>
             <div class="order__details-discount">
                 <div>Скидка:</div>
-                <div>10000</div>
+                <div>{{ totalDiscount }}&#36;</div>
             </div>
             <div class="order__details-total">
                 <div>Всего:</div>
-                <div>1000</div>
+                <div>{{ totalOrder }}</div>
             </div>
-            <button class="order__details-button">Оформить заказ</button>
+            <button class="order__details-button" :disabled="!cartArray.length">Оформить заказ</button>
             
         </div>
     </div>
@@ -33,8 +33,19 @@ export default {
     computed: {
         ...mapState(['cartArray']),
         ...mapGetters(['cartTotalSum']),
+        ...mapGetters('goods',['cartTotalDiscount']),
     totalSum() {
-        return this.cartTotalSum;
+        return parseFloat(this.cartTotalSum.toFixed(2));
+    },
+    totalDelivery() {
+        let totalDeliv = this.cartTotalSum;
+        return parseFloat((totalDeliv * 0.01).toFixed(2));
+    },
+    totalDiscount() {
+        return parseFloat(this.cartTotalDiscount.toFixed(2));
+    },
+    totalOrder() {
+        return parseFloat((this.totalSum + this.totalDelivery - this.totalDiscount).toFixed(2))
     }
     }
     
@@ -79,6 +90,40 @@ export default {
         }
     }
 }
+
+//Стиль для неактивной кнопки
+button:disabled {
+    background-color: #ccc;
+    color: #999;
+    padding: 5px 10px;
+    border: none;
+    cursor: not-allowed;
+}
+
+//всплывающая подсказка из интернета :)
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -20px;
+  left: 80%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  opacity: 0;
+  width: 10rem;
+  transition: opacity 1s;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
 
 </style>
 

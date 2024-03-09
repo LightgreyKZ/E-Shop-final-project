@@ -27,7 +27,7 @@ export default createStore({
       const totalSum = state.cartArray.reduce((sum,item) => {
         return (sum + item.price * item.quantity);
       },0);
-      return totalSum.toFixed(2);
+      return totalSum;
     }
     // doubleCounter(state) {
     //   return state.counter * 2

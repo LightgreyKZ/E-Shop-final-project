@@ -2,6 +2,9 @@
   <div class="cart__container">
     <div class="cart__container_cart">
       <h3>Моя корзина</h3>
+      <div class="cart__container_cart-empty" v-if="!cartArray.length">
+        Вы еще ничего не выбрали &#9785;
+      </div>
       <!-- Отрисовываем элементы корзины -->
       <vCartItem v-for="item in cartArray" :key="item.id" :cartItemArray="item">
       </vCartItem>
@@ -33,14 +36,22 @@ export default {
 .cart__container {
   display: flex;
   flex-direction: row;
-
   width: 1280px;
   margin: 0 auto;
   &_cart {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     width: 75%;
+    &-empty {
+      display: flex;
+      background-color: aquamarine;
+      border: 1px solid fuchsia;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      font-size: 3rem;
+    }
   }
   &_order {
     display: flex;
