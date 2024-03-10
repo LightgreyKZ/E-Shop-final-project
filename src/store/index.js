@@ -101,7 +101,21 @@ export default createStore({
         );
     },
     ADD_TO_SELECTED_ITEMS(state, payload) {
-      state.selectedItems.push(payload);
+      if (state.selectedItems.length) {
+        let isExistsSel = false;
+        state.selectedItems.map((itemsel) => {
+          if (itemsel.id === payload.id) {
+            isExistsSel = true;
+            return {};
+          }
+        });
+        if (!isExistsSel) {
+          state.selectedItems.push(payload);
+        }
+      }
+      else {
+        state.selectedItems.push(payload);
+      }
     },
     DEL_FROM_SELECTED_ITEMS(state, payload) {
       state.selectedItems.splice(state.selectedItems.findIndex((item) => item.id === payload.id),1);

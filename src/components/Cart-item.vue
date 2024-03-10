@@ -1,14 +1,26 @@
 <template>
   <div class="cart_item">
-    <input type="checkbox" v-model="isSelect" :checked="selected" @change="selectItem">
+    <input
+      type="checkbox"
+      v-model="isSelect"
+      :checked="selected"
+      @change="selectItem"
+    />
     <div class="cart_item__img" :style="backgroundImage"></div>
-    <div class="cart_item__description">{{ cartItemArray.description }}</div>
+    <div class="cart_item__description">
+      {{ cartItemArray.title }}
+      <div class="cart_item__description-instock" :class="SetStockColor">
+        {{ inStockOrder }}
+      </div>
+    </div>
     <div class="cart_item__actions">
       <div class="cart_item__actions_price">
         {{
-          ((cartItemArray.price -
-            ((cartItemArray.price * percentDiscount) / 100).toFixed(2)) *
-          cartItemArray.quantity).toFixed(2)
+          (
+            (cartItemArray.price -
+              ((cartItemArray.price * percentDiscount) / 100).toFixed(2)) *
+            cartItemArray.quantity
+          ).toFixed(2)
         }}&#36;
       </div>
       <div class="cart_item__actions_discount" v-if="percentDiscount">
@@ -49,10 +61,10 @@ export default {
     return {
       backgroundImage: `background-image: url('${this.cartItemArray.image}')`,
       isFavorite: false,
-      isSelect: false
+      isSelect: false,
     };
   },
-  props: ["cartItemArray","selected"],
+  props: ["cartItemArray", "selected"],
   computed: {
     //импортируем массив из стора, чтобы работало добавление в избранное
     ...mapState(["favArray"]),
@@ -65,6 +77,27 @@ export default {
     percentDiscount() {
       return this.GET_DISCOUNT_BY_ID(this.cartItemArray.id);
     },
+    inStockOrder() {
+      let inStockOrderText;
+      if (this.GET_INSTOCK_BY_ID(this.cartItemArray.id) == "order0") {
+        inStockOrderText = "Под заказ (< 1 недели)";
+      } else if (this.GET_INSTOCK_BY_ID(this.cartItemArray.id) == "order12") {
+        inStockOrderText = "Под заказ (1-2 недели)";
+      } else if (this.GET_INSTOCK_BY_ID(this.cartItemArray.id) == "order34") {
+        inStockOrderText = "Под заказ (3-4 недели)";
+      } else if (this.GET_INSTOCK_BY_ID(this.cartItemArray.id) == "yes") {
+        inStockOrderText = "В наличии";
+      } else {
+        inStockOrderText = "";
+      }
+      return inStockOrderText;
+    },
+    SetStockColor: function() {
+            return {
+                'stockYes'    : this.GET_INSTOCK_BY_ID(this.cartItemArray.id) == "yes",
+                'stockOrder'      : this.GET_INSTOCK_BY_ID(this.cartItemArray.id) !== "yes",
+            }
+    }
   },
   mounted() {
     //ищем был ли добавлен элемент в избранное ранее
@@ -73,9 +106,8 @@ export default {
     );
     if (isFoundFav) {
       this.isFavorite = true;
-    };
+    }
     // this.isSelect = this.selected;
-
   },
   methods: {
     //импортируем методы из стора, чтобы работало добавление в избранное
@@ -86,7 +118,7 @@ export default {
       "delFromCart",
       "decQuantityInCart",
       "addToSelect",
-      "delFromSelect"
+      "delFromSelect",
     ]),
     delItemFromCart() {
       //наверное проще уже индекс передать из Cart.vue, пока так оставлю
@@ -98,7 +130,7 @@ export default {
       //реализовал переключение между статусами в избранном/удаление из избранного
       this.isFavorite = !this.isFavorite;
       if (this.isFavorite) {
-        //добавляем в стор инфу об id сразу со структурой в виде объекта. 
+        //добавляем в стор инфу об id сразу со структурой в виде объекта.
         //Upd. Тут надо именно так, потому что массив fav только 1 поле id и содержит
         this.addToFav({ id: this.cartItemArray.id });
       } else {
@@ -113,7 +145,7 @@ export default {
       this.decQuantityInCart(this.cartItemArray);
     },
     selectItem() {
-      this.$emit('SelectItemInCart', this.cartItemArray.id, this.isSelect)
+      this.$emit("SelectItemInCart", this.cartItemArray.id, this.isSelect);
       // if (this.isSelect) {
       //   this.addToSelect({ id: this.cartItemArray.id });
       // }
@@ -121,7 +153,6 @@ export default {
       //   this.delFromSelect({ id: this.cartItemArray.id })
       // }
     },
-
   },
 };
 </script>
@@ -144,7 +175,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 1rem;
-    width: 9rem;
+    width: 8rem;
     height: 9rem;
   }
   &__description {
@@ -153,6 +184,16 @@ export default {
     padding: 0 10px;
     width: 36rem;
     height: 9rem;
+    &-instock {
+      display: block;
+      height: 2rem;
+      width: fit-content;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      // border: 1px solid black;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+    }
   }
   &__actions {
     display: flex;
@@ -212,6 +253,11 @@ export default {
   }
 }
 
+input[type="checkbox"]  {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
 .plus-minus-buttons,
 .showed-quantity {
   width: 50px;
@@ -219,6 +265,14 @@ export default {
   padding: 3px 15px 7px 15px;
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+.stockYes {
+  background-color: #c2f0e4;
+}
+
+.stockOrder {
+  background-color: #ffeec2;
 }
 
 .liked {

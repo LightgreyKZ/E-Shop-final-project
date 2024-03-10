@@ -3,7 +3,7 @@
   <div class="cart__container">
     <div class="cart__container_cart">
       <div class="cart__container_delselected">
-        <input type="checkbox" v-model="selectAll" @change="toggleSelectAll" />
+        <input class="cart__container_delselected-checkbox" type="checkbox" v-model="selectAll" @change="toggleSelectAll" />
         <span
           ><button @click="deleteSelectedItems">Удалить выбранные</button></span
         >
@@ -105,8 +105,17 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 2rem;
+    height: 3rem;
     border: 1px solid thistle;
+    &-checkbox {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
   }
 }
+
+
+
+
+
 </style>

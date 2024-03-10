@@ -79,6 +79,7 @@ export default {
                 commit('SET_DISCOUNTS', jsonDis);
             } catch (error) {
                 console.error('Ошибка при получении списка скидок:', error);
+                alert('Ошибка при получении списка скидок! Нужно запустить json-server.')
             }
         }
         // getDiscountsByCategory({commit}, payload) {
