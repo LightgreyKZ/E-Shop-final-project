@@ -1,6 +1,10 @@
 <template>
   <div class="goodsCard">
-    <div class="cardImage" :style="backgroundImage"></div>
+    
+      <router-link :to="{ name: 'card', params: { id: products.id } }" class="routeImage">
+        <div class="cardImage" :style="backgroundImage"></div>
+      </router-link>
+    
     <div class="cardInfo">
       <h4 class="cardTitle">{{ products.title }}</h4>
       <p class="instock">{{ inStockOrder }}</p>
@@ -79,10 +83,15 @@ export default {
   /* background-color: coral; */
 }
 
-.cardImage {
-  display: block;
+.routeImage {
+  display: flex;
   width: 100%;
   height: 60%;
+}
+
+.cardImage {
+  display: block;
+  flex-grow: 1;
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;

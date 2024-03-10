@@ -33,7 +33,25 @@ export default {
                 return (sum + (item.price * item.quantity * (getters.GET_DISCOUNT_BY_ID(item.id)/100)))
             },0);
             return totalDiscount;
+        },
+        //Получить название товара по ID (нужно для компонента CardView)
+        GET_NAME_BY_ID(state) {
+            return function(payload) {
+                const indexItem = state.gotGoods.findIndex((item) => item.id == payload);
+                if (indexItem !== -1) {
+                   return state.gotGoods[indexItem].title; 
+                }
+            }
+        },
+        GET_GOOD_BY_ID(state) {
+            return function(payload) {
+                const indexItem = state.gotGoods.findIndex((item) => item.id == payload);
+                if (indexItem !== -1) {
+                   return state.gotGoods[indexItem]; 
+                }
+            }
         }
+
     },
     mutations: {
         SET_GOODS(state, payload) {
