@@ -27,7 +27,6 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 
-
 export default {
     name: "CartTotal",
     computed: {
@@ -56,14 +55,18 @@ export default {
 <style lang="scss">
 
 .order {
-    border: 1px solid blueviolet;
-    min-height: 350px;
+    // border: 1px solid blueviolet;
+    min-height: 21rem;
     padding: 23px;
+    background-color: white;
+    border-radius: 1rem;
     &__details {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+
         height: 100%;
+
         &-buy, &-delivery, &-discount {
             display: flex;
             flex-direction: row;
@@ -79,14 +82,14 @@ export default {
             height: 45px;
             border-radius: 5px;
             color: white;
-            background-color: red;
+            background-color: #DC2840;
             font-weight: bold;
             transition: 0.4s;
         }
         &-button:hover {
             transform: scale(1.04);
             background-color: white;
-            color: red;
+            color: #DC2840;
         }
     }
 }

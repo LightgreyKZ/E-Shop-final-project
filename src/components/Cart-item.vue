@@ -1,5 +1,6 @@
 <template>
   <div class="cart_item">
+    <input type="checkbox" v-model="isSelect" :checked="selected" @change="selectItem">
     <div class="cart_item__img" :style="backgroundImage"></div>
     <div class="cart_item__description">{{ cartItemArray.description }}</div>
     <div class="cart_item__actions">
@@ -48,9 +49,10 @@ export default {
     return {
       backgroundImage: `background-image: url('${this.cartItemArray.image}')`,
       isFavorite: false,
+      isSelect: false
     };
   },
-  props: ["cartItemArray"],
+  props: ["cartItemArray","selected"],
   computed: {
     //импортируем массив из стора, чтобы работало добавление в избранное
     ...mapState(["favArray"]),
@@ -65,18 +67,15 @@ export default {
     },
   },
   mounted() {
-    //  this.cartItemArray.quantity = 1;
-    // console.log('Before: ' + this.isFavorite);
     //ищем был ли добавлен элемент в избранное ранее
     const isFoundFav = this.favArray.find(
       (item) => item.id === this.cartItemArray.id
     );
     if (isFoundFav) {
       this.isFavorite = true;
-    }
-    // console.log('After: ' + this.isFavorite);
-    // console.log(this.favArray);
-    // console.log(this.favArray.includes('id: 18'));
+    };
+    // this.isSelect = this.selected;
+
   },
   methods: {
     //импортируем методы из стора, чтобы работало добавление в избранное
@@ -86,16 +85,21 @@ export default {
       "delFav",
       "delFromCart",
       "decQuantityInCart",
+      "addToSelect",
+      "delFromSelect"
     ]),
     delItemFromCart() {
       //наверное проще уже индекс передать из Cart.vue, пока так оставлю
-      this.delFromCart({ id: this.cartItemArray.id });
+      // this.delFromCart({ id: this.cartItemArray.id });
+      //upd. Переделал вот так, потому что в сторе все равно смотрю на payload.id, а тут неважно, что передаю 1 элемент целиком:
+      this.delFromCart(this.cartItemArray);
     },
     addFavorite() {
       //реализовал переключение между статусами в избранном/удаление из избранного
       this.isFavorite = !this.isFavorite;
       if (this.isFavorite) {
-        //добавляем в стор инфу об id сразу со структурой в виде объекта
+        //добавляем в стор инфу об id сразу со структурой в виде объекта. 
+        //Upd. Тут надо именно так, потому что массив fav только 1 поле id и содержит
         this.addToFav({ id: this.cartItemArray.id });
       } else {
         this.delFav(this.cartItemArray);
@@ -108,6 +112,16 @@ export default {
     decItemCart() {
       this.decQuantityInCart(this.cartItemArray);
     },
+    selectItem() {
+      this.$emit('SelectItemInCart', this.cartItemArray.id, this.isSelect)
+      // if (this.isSelect) {
+      //   this.addToSelect({ id: this.cartItemArray.id });
+      // }
+      // else {
+      //   this.delFromSelect({ id: this.cartItemArray.id })
+      // }
+    },
+
   },
 };
 </script>
@@ -122,6 +136,7 @@ export default {
   border: 1px solid black;
   border-radius: 1rem;
   background-color: white;
+  margin-bottom: 1rem;
   &__img {
     display: block;
     // background-color: aquamarine;

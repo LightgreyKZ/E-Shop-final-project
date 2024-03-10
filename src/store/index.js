@@ -5,6 +5,7 @@ export default createStore({
   state: {
     cartArray: [],
     favArray: [],
+    selectedItems: [], // Массив выбранных элементов (по id)
   },
   getters: {
     cartGetter(state) {
@@ -29,12 +30,6 @@ export default createStore({
       },0);
       return totalSum;
     }
-    // doubleCounter(state) {
-    //   return state.counter * 2
-    // },
-    // tripleCounter(state) {
-    //   return state.counter * 3
-    // }
   },
   mutations: {
     //ДОБАВЛЕНИЕ В КОРЗИНУ
@@ -58,7 +53,7 @@ export default createStore({
         state.cartArray.push(payload);
       }
     },
-    //УДАЛЕНИЕ ИЗ КОРЗИНЫ
+    //УДАЛЕНИЕ ИЗ КОРЗИНЫ ( ПО ID)
     DEL_FROM_CART(state, payload) {
       state.cartArray.splice(
         state.cartArray.findIndex((item) => item.id === payload.id),
@@ -105,6 +100,23 @@ export default createStore({
         state.favArray.findIndex((item) => item.id === payload.id),1
         );
     },
+    ADD_TO_SELECTED_ITEMS(state, payload) {
+      state.selectedItems.push(payload);
+    },
+    DEL_FROM_SELECTED_ITEMS(state, payload) {
+      state.selectedItems.splice(state.selectedItems.findIndex((item) => item.id === payload.id),1);
+    },
+    DEL_SELECTED_ITEMS_FROM_CART(state) {
+      // state.cartArray = state.cartArray.filter((item) => item.id === 111);
+      // state.selectedItems = [];
+      // let rrr = state.selectedItems.forEach(element => {element.id})
+      for (let i = 0; i < state.selectedItems.length; i++) {
+        state.cartArray = state.cartArray.filter((item) => item.id !== state.selectedItems[i].id)
+        // state.cartArray.splice((state.cartArray.findIndex((item) => item.id == state.selectedItems[i].id)),1)
+        // console.log('id:' + state.selectedItems[i].id);
+      }
+      state.selectedItems = [];
+    }
   },
   actions: {
     //ДОБАВЛЕНИЕ В КОРЗИНУ
@@ -128,6 +140,15 @@ export default createStore({
     decQuantityInCart({ commit }, payload) {
       commit("DEC_QUANTITY_IN_CART", payload);
     },
+    addToSelect({commit}, payload) {
+      commit("ADD_TO_SELECTED_ITEMS", payload);
+    },
+    delFromSelect({commit}, payload) {
+      commit("DEL_FROM_SELECTED_ITEMS", payload);
+    },
+    delSelectedItemsFromCart({commit}) {
+      commit("DEL_SELECTED_ITEMS_FROM_CART");
+    }
   },
   modules: {
     goods,

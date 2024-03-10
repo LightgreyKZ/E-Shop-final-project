@@ -1,5 +1,8 @@
 <template>
-    <router-view />
+    <div class="main_wrapper">
+      <router-view />
+    </div>
+    
 </template>
 
 <script>
@@ -11,5 +14,9 @@ export default {
 </script>
 
 <style scoped>
+
+.main_wrapper {
+  width: 1280px;
+}
 
 </style>

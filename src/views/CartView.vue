@@ -1,7 +1,14 @@
 <template>
-      <vHeader />
+    <vHeader />
+    <div class="cart_wrapper">
+      <div class="breadcrumb">
+        <router-link to="/">Главная</router-link><span> - </span>
+        <router-link to="/cart">Корзина</router-link>
+      </div>
       
       <vCart />
+    </div>
+      
 </template>
   
   <script>
@@ -12,10 +19,23 @@
     name: "Cart",
     components: {
         vCart,
-        vHeader
+        vHeader,
     },
   };
   </script>
   
-  <style>
-  </style>
+<style scoped>
+
+.cart_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.breadcrumb {
+  margin-top: 1rem;
+  font-family: monospace ;
+  font-size: 0.9rem;
+}
+
+</style>
