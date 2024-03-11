@@ -3,16 +3,27 @@
   <div class="cart__container">
     <div class="cart__container_cart">
       <div class="cart__container_delselected">
-        <input class="cart__container_delselected-checkbox" type="checkbox" v-model="selectAll" @change="toggleSelectAll" />
+        <input
+          class="cart__container_delselected-checkbox"
+          type="checkbox"
+          v-model="selectAll"
+          @change="toggleSelectAll"
+        />
         <span
-          ><button @click="deleteSelectedItems">Удалить выбранные</button></span
+          ><button class="cart__container_delselected-button" @click="deleteSelectedItems">Удалить выбранные</button></span
         >
       </div>
       <div class="cart__container_cart-empty" v-if="!cartArray.length">
         Вы еще ничего не выбрали &#9785;
       </div>
       <!-- Отрисовываем элементы корзины -->
-      <vCartItem v-for="item in cartArray" :key="item.id" :cartItemArray="item" :selected="selectAll" @SelectItemInCart="toggleSelect">
+      <vCartItem
+        v-for="item in cartArray"
+        :key="item.id"
+        :cartItemArray="item"
+        :selected="selectAll"
+        @SelectItemInCart="toggleSelect"
+      >
       </vCartItem>
     </div>
     <div class="cart__container_order">
@@ -34,21 +45,21 @@ export default {
     };
   },
   computed: {
-    ...mapState(["cartArray","selectedItems"]),
+    ...mapState(["cartArray", "selectedItems"]),
   },
   methods: {
-    ...mapActions(["addToSelect","delFromSelect","delSelectedItemsFromCart"]),
+    ...mapActions(["addToSelect", "delFromSelect", "delSelectedItemsFromCart"]),
     toggleSelectAll() {
       if (this.selectAll) {
         // Выбрать все элементы
         // this.addToSelect(this.cartArray.forEach(item => item.id));
-        this.cartArray.forEach(element => {
-          this.addToSelect({ id: element.id })
+        this.cartArray.forEach((element) => {
+          this.addToSelect({ id: element.id });
         });
       } else {
         // Снять выбор со всех элементов
-        this.cartArray.forEach(element => {
-          this.delFromSelect({ id: element.id })
+        this.cartArray.forEach((element) => {
+          this.delFromSelect({ id: element.id });
         });
       }
     },
@@ -56,14 +67,14 @@ export default {
     toggleSelect(idFromCart, isSelFromCart) {
       if (isSelFromCart) {
         this.addToSelect({ id: idFromCart });
-      }
-      else {
-        this.delFromSelect({ id: idFromCart })
+      } else {
+        this.delFromSelect({ id: idFromCart });
       }
     },
     deleteSelectedItems() {
       this.delSelectedItemsFromCart();
-    }
+      this.selectAll = false;
+    },
   },
   components: {
     vCartItem,
@@ -98,6 +109,7 @@ export default {
     display: flex;
     flex-direction: column;
     // border: 1px solid blue;
+    margin-top: 3rem;
     width: 25%;
   }
   &_delselected {
@@ -111,11 +123,14 @@ export default {
       width: 1.3rem;
       height: 1.3rem;
     }
+    &-button {
+      background-color: #ECECEC;
+      height: 40px;
+      width: 150px;
+      margin-right: 5px;
+      border-radius: 7px;
+      font-weight: 500;
+    }
   }
 }
-
-
-
-
-
 </style>

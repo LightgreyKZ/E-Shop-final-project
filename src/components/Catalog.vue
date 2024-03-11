@@ -7,8 +7,9 @@
   <button @click="resetFilter()">Сбросить фильтры</button>
   <button @click="loadDiscounts()">Загрузить скидки</button>
 
-  <p>Length: {{ goods.gotGoods.length }}</p>
-  <p>isLoading: {{ goods.isLoading }}</p>
+  <!-- <p>Length: {{ goods.gotGoods.length }}</p> -->
+  <!-- <p>isLoading: {{ goods.isLoading }}</p> -->
+  <div class="loading" v-if="!goods.isLoading">Загрузка...</div>
   <div class="catalog">
     <!-- подумать над v-show v-if -->
     <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
@@ -81,8 +82,19 @@ export default {
   gap: 10px;
   width: 1280px;
   margin: 0 auto;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   /* background-color: rgb(234, 252, 255); */
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 3rem;
+  /* background-color: aquamarine; */
 }
 
 </style>

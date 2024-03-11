@@ -1,8 +1,7 @@
 <template>
   <div class="home-container">
-    <header>
+    <header class="sticky">
       <vHeader />
-      <h3>It's home view</h3>
     </header>
     <main>
       <vCatalog />
@@ -28,5 +27,9 @@ export default {
 
 <style scoped>
 
+.sticky {
+  position: sticky;
+  top: 0;
+}
 
 </style>

@@ -2,7 +2,10 @@
   <div class="goodsCard">
     
       <router-link :to="{ name: 'card', params: { id: products.id } }" class="routeImage">
-        <div class="cardImage" :style="backgroundImage"></div>
+        <!-- <div class="cardImage" :style="backgroundImage"></div> -->
+        <div class="cardImage">
+          <img :src=products.image alt="image" height="100%" width="100%">
+        </div>
       </router-link>
     
     <div class="cardInfo">
@@ -32,7 +35,7 @@ export default {
   name: "Catalog-item",
   data() {
     return {
-      backgroundImage: `background-image: url('${this.products.image}')`,
+      // backgroundImage: `background-image: url('${this.products.image}')`,
     };
   },
   props: ["addinfo", "products"],
@@ -87,17 +90,26 @@ export default {
   display: flex;
   width: 100%;
   height: 60%;
+  border-radius: 1rem;
+  /* border: 1px solid red; */
 }
 
 .cardImage {
   display: block;
-  flex-grow: 1;
-  background-position: top;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* flex-grow: 1; */
+  /* background-position: top;
   background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 1rem;
-  border: 1px solid red;
-  transition: 0.4s;
+  background-repeat: no-repeat; */
+  /* border-radius: 1rem; */
+  /* border: 1px solid red; */
+  transition: 0.5s;
+}
+
+img {
+    border-radius: 1rem;
 }
 
 .cardInfo {
@@ -107,8 +119,10 @@ export default {
   align-items: start;
   height: 40%;
   min-width: 100%;
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 19.5px;
   /* border: 1px solid salmon; */
 }
 
@@ -122,16 +136,24 @@ export default {
 
 .instock {
     flex-grow: 1;
+    font-weight: 400;
 }
 
 .inCart {
     padding: 0 5px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .cardPrice {
-  font-size: 1.6rem;
+  /* font-size: 1.6rem;
+  font-weight: 700; */
+  font-family: Montserrat;
+  font-size: 24px;
   font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+
 }
 
 .redPrice {
@@ -139,17 +161,16 @@ export default {
 }
 
 .cardImage:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
   cursor: grabbing;
 }
 
 .addToCart {
-  width: 3rem;
-  height: 2rem;
+  width: 42px;
+  height: 32px;
   background-color: #ECECEC;
   color: black;
-  font-weight: bold;
-  font-size:medium;
+  font-weight: 700;
   border-radius: 8px;
   transition: 0.4s;
   border: none;

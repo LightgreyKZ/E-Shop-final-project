@@ -204,6 +204,7 @@ export default {
     // background-color: rgb(255, 191, 127);
     width: 15rem;
     height: 9rem;
+    margin-right: 5px;
     &_price {
       font-weight: bold;
       font-size: 1.4rem;
@@ -228,7 +229,7 @@ export default {
       justify-content: center; /* Центрирование по горизонтали */
       align-items: center; /* Центрирование по вертикали */
       width: 40px;
-      height: 40px;
+      height: 100%;
       border-radius: 50%;
       // border: 1px solid grey;
       font-size: 2rem;
@@ -240,6 +241,9 @@ export default {
       flex-direction: row;
       align-items: baseline;
       height: 100%;
+      background-color: #ECECEC;
+      border-radius: 7px;
+      // border: 1px solid black;
     }
     &-like:hover {
       color: red;
@@ -247,7 +251,7 @@ export default {
     }
     &-delete:hover {
       color: red;
-      background-color: rgba(211, 211, 211, 0.642);
+      background-color: #ECECEC;
       cursor: pointer;
     }
   }
@@ -260,11 +264,17 @@ input[type="checkbox"]  {
 
 .plus-minus-buttons,
 .showed-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
-  height: 40px;
-  padding: 3px 15px 7px 15px;
-  font-size: 1.3rem;
+  height: 100%;
+  // padding: 3px 15px 7px 15px;
+  font-size: 1.1rem;
   font-weight: bold;
+  border: 1px solid #ECECEC;
+  background-color: #ECECEC;
+  border-radius: 7px;
 }
 
 .stockYes {
