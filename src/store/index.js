@@ -41,6 +41,7 @@ export default createStore({
           if (item.id === payload.id) {
             isExists = true;
             item.quantity++;
+            item.color = payload.color;
           }
         });
         //если такого товара ранее не было, то пушим

@@ -40,7 +40,7 @@ export default {
     ...mapActions(["addToCart"]),
     add_To_Cart() {
       //над этим просидел часов 5: (чтобы добавить кол-во в корзину)
-      this.addToCart({ ...this.products, quantity: 1 });
+      this.addToCart({ ...this.products, quantity: 1, color: '' });
     },
   },
   computed: {

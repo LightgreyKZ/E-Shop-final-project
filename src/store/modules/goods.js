@@ -6,6 +6,7 @@ export default {
     state: {
         gotGoods: [],   /* Основной массив данных */
         gotDiscounts: [], /* Массив со скидками */
+        localGoodsArray: [], /* Массив для компонента CardView */
         isLoading: false
     },
     getters: {
@@ -42,14 +43,6 @@ export default {
                    return state.gotGoods[indexItem].title; 
                 }
             }
-        },
-        GET_GOOD_BY_ID(state) {
-            return function(payload) {
-                const indexItem = state.gotGoods.findIndex((item) => item.id == payload);
-                if (indexItem !== -1) {
-                   return state.gotGoods[indexItem]; 
-                }
-            }
         }
 
     },
@@ -71,7 +64,15 @@ export default {
         },
         SET_DISCOUNTS(state, payload) {
             state.gotDiscounts = payload;
-
+        },
+        //Получаем 1 элемент массива товаров для карточки детального описания (CardView)
+        GET_GOOD_BY_ID(state, payload) {
+                
+                const indexItem = state.gotGoods.findIndex((item) => item.id == payload);
+                if (indexItem !== -1) {
+                   state.localGoodsArray = state.gotGoods[indexItem]; 
+                //    return this.localGoodsArray;
+                }
         }
 
     },
@@ -99,6 +100,9 @@ export default {
                 console.error('Ошибка при получении списка скидок:', error);
                 alert('Ошибка при получении списка скидок! Нужно запустить json-server.')
             }
+        },
+        getGoodById({commit}, payload) {
+            commit('GET_GOOD_BY_ID', payload);
         }
         // getDiscountsByCategory({commit}, payload) {
         //     commit('GET_DISCOUNT_BY_CATEGORY', payload)
