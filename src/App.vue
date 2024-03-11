@@ -16,7 +16,7 @@ export default {
 <style scoped>
 
 .main_wrapper {
-  width: 1280px;
+  width: 1440px;
 }
 
 </style>

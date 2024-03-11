@@ -1,11 +1,14 @@
 <template>
-  <select v-model="SelectedCategory" @change="filterGoods(SelectedCategory)">
-    <option v-for="item in getDistinctCategory" >{{ item }}</option>
-  </select>
-  <span>{{ SelectedCategory }}</span>
-  <!-- <input type="text" v-model="userName" placeholder="Имя"> -->
-  <button @click="resetFilter()">Сбросить фильтры</button>
-  <button @click="loadDiscounts()">Загрузить скидки</button>
+  <div class="filter">
+      <select v-model="SelectedCategory" @change="filterGoods(SelectedCategory)">
+        <option v-for="item in getDistinctCategory" >{{ item }}</option>
+      </select>
+      <span>{{ SelectedCategory }}</span>
+      <!-- <input type="text" v-model="userName" placeholder="Имя"> -->
+      <button @click="resetFilter()">Сбросить фильтры</button>
+      <button @click="loadDiscounts()">Загрузить скидки</button>
+  </div>
+  
 
   <!-- <p>Length: {{ goods.gotGoods.length }}</p> -->
   <!-- <p>isLoading: {{ goods.isLoading }}</p> -->
@@ -74,6 +77,11 @@ export default {
 
 <style>
 
+.filter {
+  width: 1280px;
+  margin: 0 auto;
+}
+
 .catalog {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -81,7 +89,7 @@ export default {
   /* grid-template-rows: repeat(4, 451px); */
   gap: 10px;
   width: 1280px;
-  margin: 0 auto;
+  margin: 2rem auto;
   /* border: 1px solid blue; */
   /* background-color: rgb(234, 252, 255); */
 }

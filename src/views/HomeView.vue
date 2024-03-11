@@ -4,6 +4,7 @@
       <vHeader />
     </header>
     <main>
+      <vBanner />
       <vCatalog />
     </main>
     <footer>
@@ -15,17 +16,23 @@
 <script>
 import vHeader from "@/components/Header.vue";
 import vCatalog from "../components/Catalog.vue";
+import vBanner from "@/components/Banner.vue"
 
 export default {
   name: "HomeView",
   components: {
     vHeader,
-    vCatalog
+    vCatalog,
+    vBanner
   },
 };
 </script>
 
 <style scoped>
+
+.home-container {
+  margin: 0 auto;
+}
 
 .sticky {
   position: sticky;
