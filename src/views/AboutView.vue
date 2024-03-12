@@ -16,4 +16,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.about-container {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+</style>

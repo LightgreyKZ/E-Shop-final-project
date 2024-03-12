@@ -177,7 +177,7 @@ img {
   display: inline;
   min-height: 100%;
   /* cursor: url("../components/icons/hand-pointer-svgrepo-com.svg"), auto; */
-  cursor: url("../components/icons/free-icon-hand-cursor-5781771.png"), auto;
+  cursor: url("../components/icons/Hand-icon.png"), auto;
 }
 
 .addToCart:hover {

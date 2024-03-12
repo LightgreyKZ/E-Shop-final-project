@@ -30,6 +30,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 1280px;
+  margin: 0 auto;
 }
 
 .breadcrumb {

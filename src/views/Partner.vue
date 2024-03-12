@@ -17,4 +17,9 @@ export default {
 </script>
 
 <style>
+.partner-container {
+  width: 1280px;
+  margin: 0 auto;
+}
+
 </style>

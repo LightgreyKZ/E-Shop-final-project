@@ -36,6 +36,8 @@ export default {
 
 .sticky {
   position: sticky;
+  width: 100%;
+  background-color: white;
   top: 0;
   z-index: 999;
 }
