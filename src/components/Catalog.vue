@@ -13,7 +13,7 @@
   <!-- <p>Length: {{ goods.gotGoods.length }}</p> -->
   <!-- <p>isLoading: {{ goods.isLoading }}</p> -->
   <div class="loading" v-if="!goods.isLoading">Загрузка...</div>
-  <div class="catalog">
+  <div id="catalog_list" class="catalog">
     <!-- подумать над v-show v-if -->
     <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
       <!-- <template #instock>
