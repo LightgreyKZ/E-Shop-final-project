@@ -8,7 +8,7 @@
       <vCatalog />
     </main>
     <footer>
-      <!-- Здесь контент подвала -->
+      <vFooter />
     </footer>
   </div>
 </template>
@@ -17,13 +17,15 @@
 import vHeader from "@/components/Header.vue";
 import vCatalog from "../components/Catalog.vue";
 import vBanner from "@/components/Banner.vue"
+import vFooter from "@/components/Footer.vue"
 
 export default {
   name: "HomeView",
   components: {
     vHeader,
     vCatalog,
-    vBanner
+    vBanner,
+    vFooter
   },
 };
 </script>
@@ -40,6 +42,7 @@ export default {
   background-color: white;
   top: 0;
   z-index: 999;
+  border-bottom: 1px solid #ECECEC;
 }
 
 </style>
