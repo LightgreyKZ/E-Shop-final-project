@@ -7,19 +7,26 @@
       </div>
       
       <vCart />
+      <div class="footer_bottom">
+        <vFooter />
+      </div>
     </div>
+
+    
       
 </template>
   
   <script>
   import vCart from "@/components/Cart.vue";
   import vHeader from "@/components/Header.vue"
+  import vFooter from "@/components/Footer.vue"
   
   export default {
     name: "Cart",
     components: {
         vCart,
         vHeader,
+        vFooter
     },
   };
   </script>
@@ -38,6 +45,13 @@
   margin-top: 1rem;
   font-family: monospace ;
   font-size: 0.9rem;
+}
+
+.footer_bottom {
+  position: fixed;
+  bottom: 0;
+  /* width: 1280px; */
+  /* margin: 0 auto; */
 }
 
 </style>

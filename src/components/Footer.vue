@@ -39,6 +39,7 @@ export default {
     align-items: center;
     background-color: white;
     border-top: 1px solid #ECECEC;
+ 
 }
 .footer_wrapper1280 {
     display: flex;

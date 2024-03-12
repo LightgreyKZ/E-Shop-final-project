@@ -16,9 +16,9 @@
         </div>
         <div class="art">
             <img src="src/assets/images/7d358341307a4566291263f5856958f5.png" alt="laughing girl" class="head_art" width="100%" height="100%">
-            <img src="src/assets/images/path82.png" alt="big heart" class="heart_art1" >
-            <img src="src/assets/images/path40.png" alt="big heart" class="heart_art2">
-            <img src="src/assets/images/path78.png" alt="big heart" class="heart_art3">
+            <img src="src/assets/images/path82.png" alt="big heart" class="heart_art1">
+            <img src="src/assets/images/path40.png" alt="heart" class="heart_art2">
+            <img src="src/assets/images/path78.png" alt="heart" class="heart_art3">
         </div>
     </div>
 </template>
@@ -132,12 +132,23 @@ export default {
     position: absolute; 
     top: 467px; 
     left: 580px;
-    z-index: 8;
+    z-index: 11;
+    transition: all 0.3s ease-in-out;
 }
 .heart_art3 {
     position: absolute; 
     top: 46px; 
     left: 50px;
-    z-index: 8;
+    z-index: 12;
+    transition: all 0.3s ease-in-out;
 }
+
+.rotate_heart {
+    transition: all 0.3s ease-in-out;
+}
+
+.heart_art2:hover, .heart_art3:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
 </style>

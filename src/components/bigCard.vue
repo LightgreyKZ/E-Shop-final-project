@@ -156,6 +156,7 @@ export default {
         color: white;
         font-size: 1rem;
         font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
         background-color: #DC2840;
         border: none;
         border-radius: 0.5rem;

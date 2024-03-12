@@ -82,7 +82,7 @@ export default {
   &__item {
     display: flex;
     width: 15rem;
-    height: 80%;
+    height: 60%;
     // border: 1px solid red;
     align-items: center;
     justify-content: space-around;

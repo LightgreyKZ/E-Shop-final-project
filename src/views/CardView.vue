@@ -6,6 +6,9 @@
         <router-link to="/">Главная</router-link><span> - {{ getNameOfGood }}</span>
       </div>
       <vBigCard />
+      <div class="footer_bottom">
+        <vFooter />
+      </div>
     </div>
       
 </template>
@@ -13,13 +16,15 @@
   <script>
   import vHeader from "@/components/Header.vue"
   import vBigCard from "@/components/bigCard.vue"
+  import vFooter from "@/components/Footer.vue"
   import { mapGetters } from "vuex";
   
   export default {
     name: "CardView",
     components: {
         vHeader,
-        vBigCard
+        vBigCard,
+        vFooter
     },
     computed: {
         ...mapGetters("goods", ["GET_NAME_BY_ID"]),
@@ -43,9 +48,14 @@
 
 .breadcrumb {
   margin-top: 1rem;
-  font-family: monospace ;
+  /* font-family: monospace ; */
   font-size: 0.9rem;
   color: #676767;
+}
+
+.footer_bottom {
+  position: fixed;
+  bottom: 0;
 }
 
 </style>
