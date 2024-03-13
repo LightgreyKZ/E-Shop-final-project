@@ -5,11 +5,10 @@
         <router-link to="/">Главная</router-link><span> - </span>
         <router-link to="/cart">Корзина</router-link>
       </div>
-      
       <vCart />
-      <div class="footer_bottom">
+    </div>
+    <div class="footer_bottom">
         <vFooter />
-      </div>
     </div>
 
     
@@ -48,10 +47,10 @@
 }
 
 .footer_bottom {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  /* width: 1280px; */
-  /* margin: 0 auto; */
+  width: 1280px;
+  margin: 0 auto;
 }
 
 </style>

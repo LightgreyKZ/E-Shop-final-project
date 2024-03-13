@@ -12,6 +12,14 @@
       <div class="cart_item__description-instock" :class="SetStockColor">
         {{ inStockOrder }}
       </div>
+      <div class="cart_item__description-colors">
+        <div class="cart_item__description-colorbar" :class="SetColorColor"></div>
+        <div class="cart_item__description-colortext">
+          {{ SetTextForColor }}
+        </div>
+        
+      </div>
+      
     </div>
     <div class="cart_item__actions">
       <div class="cart_item__actions_price">
@@ -97,6 +105,29 @@ export default {
                 'stockYes'    : this.GET_INSTOCK_BY_ID(this.cartItemArray.id) == "yes",
                 'stockOrder'      : this.GET_INSTOCK_BY_ID(this.cartItemArray.id) !== "yes",
             }
+    },
+    SetColorColor() {
+        return {
+            'beige'    : this.cartItemArray.color == 'beige',
+            'blue'     : this.cartItemArray.color == 'blue',
+            'purple'   : this.cartItemArray.color == 'purple',
+            'grey'     : this.cartItemArray.color == 'grey',
+            'default'  : this.cartItemArray.color == ''
+        }
+    },
+    SetTextForColor() {
+      let colorText;
+      if (this.cartItemArray.color == 'beige') 
+        {colorText = 'Бежевый'}
+      else if (this.cartItemArray.color == 'blue') 
+        {colorText = 'Голубой'}
+      else if (this.cartItemArray.color == 'purple') 
+        {colorText = 'Фиолетовый'}
+      else if (this.cartItemArray.color == 'grey') 
+        {colorText = 'Серый'}
+      else 
+        {colorText = 'По умолчанию'};
+      return colorText
     }
   },
   mounted() {
@@ -193,6 +224,29 @@ export default {
       // border: 1px solid black;
       border-radius: 1rem;
       font-size: 0.8rem;
+    }
+    &-colors {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 10px;
+    }
+    &-colorbar {
+        display: block;
+        height: 24px;
+        width: 24px;
+        // margin-top: 1rem;
+        // align-items: center;
+        padding: 5px;
+        // color: black;
+        // border: 1px solid black;
+        border-radius: 5px;
+        // font-size: 0.8rem;
+    }
+    &-colortext {
+      font-size: 12px;
     }
   }
   &__actions {
@@ -308,4 +362,27 @@ input[type="checkbox"]  {
     transform: scale(1);
   }
 }
+
+.beige {
+    background-color: #fec406;
+    border: 2px solid #fec406;
+}
+.blue {
+    background-color: #389bd8;
+    border: 2px solid #389bd8;;
+}
+.purple {
+    background-color:purple;
+    border: 2px solid purple;
+}
+.grey {
+    background-color:grey;
+    border: 2px solid grey;
+}
+
+.default {
+    // background-color:grey;
+    border: 2px solid grey;
+}
+
 </style>

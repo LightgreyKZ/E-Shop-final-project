@@ -97,8 +97,8 @@ export default {
     width: 75%;
     &-empty {
       display: flex;
-      background-color: aquamarine;
-      border: 1px solid fuchsia;
+      // background-color: aquamarine;
+      // border: 1px solid fuchsia;
       align-items: center;
       justify-content: center;
       flex-grow: 1;
@@ -118,7 +118,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 3rem;
-    border: 1px solid thistle;
+    // border: 1px solid thistle;
     &-checkbox {
       width: 1.3rem;
       height: 1.3rem;

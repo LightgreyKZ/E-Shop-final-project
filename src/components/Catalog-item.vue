@@ -19,7 +19,7 @@
         <p class="cardPrice" :class="{ redPrice: percentDiscount }">
             {{ products.price - (products.price * percentDiscount/100).toFixed(2) }}&#36;
         </p>
-        <span class="inCart" v-if="isInCart"> Товар в корзине </span>
+        <span class="inCart" v-if="isInCart">В корзине!</span>
         <button class="addToCart" @click="add_To_Cart()">+</button>
         <!-- <p v-if="percentDiscount">Процент скидки: {{ percentDiscount }} %</p> -->
       </div>

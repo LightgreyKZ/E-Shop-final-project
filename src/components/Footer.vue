@@ -23,9 +23,9 @@
 </template>
 
 <script>
-export default {
-  name: "footer",
-};
+// export default {
+//   name: "footer-vue",
+// };
 </script>
 
 <style lang="scss" scoped>

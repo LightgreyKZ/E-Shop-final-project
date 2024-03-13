@@ -1,19 +1,19 @@
 <template>
-  <div class="filter">
-      <select v-model="SelectedCategory" @change="filterGoods(SelectedCategory)">
+  <div class="filter" id="catalog_list">
+      <select v-model="SelectedCategory" @change="filterGoods(SelectedCategory)" class="filter_select">
         <option v-for="item in getDistinctCategory" >{{ item }}</option>
       </select>
-      <span>{{ SelectedCategory }}</span>
+      <!-- <span>{{ SelectedCategory }}</span> -->
       <!-- <input type="text" v-model="userName" placeholder="Имя"> -->
-      <button @click="resetFilter()">Сбросить фильтры</button>
-      <button @click="loadDiscounts()">Загрузить скидки</button>
+      <button @click="resetFilter()" class="filter_button" :disabled="!SelectedCategory.length">Сбросить фильтр</button>
+      <!-- <button @click="loadDiscounts()">Загрузить скидки</button> -->
   </div>
   
 
   <!-- <p>Length: {{ goods.gotGoods.length }}</p> -->
   <!-- <p>isLoading: {{ goods.isLoading }}</p> -->
   <div class="loading" v-if="!goods.isLoading">Загрузка...</div>
-  <div id="catalog_list" class="catalog">
+  <div class="catalog">
     <!-- подумать над v-show v-if -->
     <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
       <!-- <template #instock>
@@ -55,11 +55,12 @@ export default {
     },
     filterGoods(category) {
         const result = this.goods.gotGoods.filter(item => item.category === category);
-        console.log(result);
+        // console.log(result);
         this.filteredArray = result;
     },
     resetFilter() {
         this.filteredArray.splice(0,this.filteredArray.length);
+        this.SelectedCategory = '';
     },
 
  
@@ -75,11 +76,26 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
 .filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
   width: 1280px;
-  margin: 0 auto;
+  margin: 1rem auto;
+  height: 50px;
+  /* margin-top: 1rem; */
+}
+
+.filter_select, .filter_button {
+  /* height: 1.6rem; */
+  font-size: 1.2rem;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
 }
 
 .catalog {

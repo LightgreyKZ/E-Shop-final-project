@@ -98,7 +98,7 @@ export default {
                 commit('SET_DISCOUNTS', jsonDis);
             } catch (error) {
                 console.error('Ошибка при получении списка скидок:', error);
-                alert('Ошибка при получении списка скидок! Нужно запустить json-server.')
+                alert('Ошибка при получении списка скидок! Нужно запустить json-server: `npm install -g json-server`, затем json-server src/data/dis.json')
             }
         },
         getGoodById({commit}, payload) {
