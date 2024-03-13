@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-wrapper">
+    <div class="modal-wrapper" v-if="showModal">
         <div class="modal">
             <div class="modal-header">
                 <button @click="closeModal">Закрыть</button>
@@ -14,17 +14,16 @@
 
 <script>
 export default {
-    data() {
-        return {
-            showModal: false
-        };
+    props: {
+        showModal: Boolean
     },
     methods: {
-        openModal() {
-            this.showModal = true;
-        },
+        // openModal() {
+        //     this.$emit('openModalWindow', this.showModal)
+        //     // this.showModal = true;
+        // },
         closeModal() {
-            this.showModal = false;
+            this.$emit('close-modal'); // Генерируем событие для родительского компонента
         }
     }
 }
@@ -34,11 +33,15 @@ export default {
 <style scoped>
 .modal-wrapper {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 500px;
-    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 200px;
     background-color: #FAFAFF;
+    border: 1px solid green;
+    border-radius: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;

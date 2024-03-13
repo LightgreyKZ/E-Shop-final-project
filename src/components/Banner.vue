@@ -15,10 +15,10 @@
             </div>
         </div>
         <div class="art">
-            <img src="src/assets/images/7d358341307a4566291263f5856958f5.png" alt="laughing girl" class="head_art" width="100%" height="100%">
-            <img src="src/assets/images/path82.png" alt="big heart" class="heart_art1">
-            <img src="src/assets/images/path40.png" alt="heart" class="heart_art2">
-            <img src="src/assets/images/path78.png" alt="heart" class="heart_art3">
+            <img src="../assets/images/7d358341307a4566291263f5856958f5.png" alt="laughing girl" class="head_art" width="100%" height="100%">
+            <img src="../assets/images/path82.png" alt="big heart" class="heart_art1">
+            <img src="../assets/images/path40.png" alt="heart" class="heart_art2">
+            <img src="../assets/images/path78.png" alt="heart" class="heart_art3">
         </div>
     </div>
 </template>

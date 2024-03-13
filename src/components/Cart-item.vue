@@ -239,7 +239,7 @@ export default {
     &-buttons {
       display: flex;
       flex-direction: row;
-      align-items: baseline;
+      // align-items: baseline;
       height: 100%;
       background-color: #ECECEC;
       border-radius: 7px;

@@ -15,7 +15,7 @@
         </div>
         <div class="footer-links">
             <router-link to="/partner">Стать партнером</router-link>
-            <router-link to="/delivery">Доставка</router-link>
+            <router-link to="/">Доставка</router-link>
             <router-link to="/about">О проекте</router-link>
         </div>
         </div>

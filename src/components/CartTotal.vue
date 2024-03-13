@@ -18,16 +18,24 @@
                 <div>Всего:</div>
                 <div>{{ totalOrder }}</div>
             </div>
-            <button class="order__details-button" :disabled="!cartArray.length">Оформить заказ</button>
-            
+            <button class="order__details-button" @click="openModal" :disabled="!cartArray.length">Оформить заказ</button>
+            <vModalWindow :showModal = "showModal" @close-modal="closeModal">
+                <div>Заказ сформирован!</div>
+            </vModalWindow>
         </div>
     </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import vModalWindow from "@/components/ModalVindow.vue"
 
 export default {
+    data() {
+        return {
+            showModal: false
+        }
+    },
     name: "CartTotal",
     computed: {
         ...mapState(['cartArray']),
@@ -46,6 +54,17 @@ export default {
     totalOrder() {
         return parseFloat((this.totalSum + this.totalDelivery - this.totalDiscount).toFixed(2))
     }
+    },
+    methods: {
+        openModal() {
+            this.showModal = true;
+        },
+        closeModal() {
+            this.showModal = false;
+        }
+    },
+    components: {
+        vModalWindow
     }
     
 }
