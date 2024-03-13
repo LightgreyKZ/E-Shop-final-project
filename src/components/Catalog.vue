@@ -1,5 +1,6 @@
 <template>
-  <div class="filter" id="catalog_list">
+  <div id="catalog_list"></div>
+  <div class="filter">
       <select v-model="SelectedCategory" @change="filterGoods(SelectedCategory)" class="filter_select">
         <option v-for="item in getDistinctCategory" >{{ item }}</option>
       </select>

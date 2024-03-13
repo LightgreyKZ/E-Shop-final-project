@@ -10,9 +10,6 @@
     <div class="footer_bottom">
         <vFooter />
     </div>
-
-    
-      
 </template>
   
   <script>
@@ -38,6 +35,7 @@
   gap: 1rem;
   width: 1280px;
   margin: 0 auto;
+  min-height: calc(100vh - 176px);
 }
 
 .breadcrumb {

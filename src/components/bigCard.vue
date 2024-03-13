@@ -107,7 +107,7 @@ export default {
   padding: 5px;
   gap: 1rem;
   background-color: rgb(255, 255, 255);
-  border: 1px solid black;
+  // border: 1px solid black;
   border-radius: 1rem;
   &_image {
     width: fit-content;

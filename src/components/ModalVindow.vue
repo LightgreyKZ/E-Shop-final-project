@@ -40,7 +40,7 @@ export default {
     width: 300px;
     height: 200px;
     background-color: #FAFAFF;
-    border: 1px solid green;
+    border: 1px solid #ECECEC;
     border-radius: 1rem;
     display: flex;
     justify-content: center;
