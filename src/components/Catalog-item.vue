@@ -19,7 +19,7 @@
         <p class="cardPrice" :class="{ redPrice: percentDiscount }">
             {{ products.price - (products.price * percentDiscount/100).toFixed(2) }}&#36;
         </p>
-        <span class="inCart" v-if="isInCart">В корзине!</span>
+        <span class="inCart" v-if="isInCart">В корзине: {{ cartCountItemLocal }}</span>
         <button class="addToCart" @click="add_To_Cart()">+</button>
         <!-- <p v-if="percentDiscount">Процент скидки: {{ percentDiscount }} %</p> -->
       </div>
@@ -48,13 +48,16 @@ export default {
   },
   computed: {
     ...mapState(["cartArray"]),
-    ...mapGetters(["isItemInCart"]),
+    ...mapGetters(["isItemInCart","cartCountItem"]),
     ...mapGetters("goods", ["GET_DISCOUNT_BY_ID", "GET_INSTOCK_BY_ID"]),
     isInCart() {
       return this.isItemInCart(this.products.id);
     },
     percentDiscount() {
       return this.GET_DISCOUNT_BY_ID(this.products.id);
+    },
+    cartCountItemLocal() {
+      return this.cartCountItem(this.products.id);
     },
     inStockOrder() {
       let inStockOrderText;

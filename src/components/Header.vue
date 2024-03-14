@@ -46,8 +46,8 @@
             alt="cart_icon"
           />
           <transition name="shaketext">
-            <div class="cart_count" :key="cartGetter.length">
-              {{ cartGetter.length }}
+            <div class="cart_count" :key="cartCounts">
+              {{ cartCounts }}
             </div>
           </transition>
         </div>
@@ -62,7 +62,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Header",
   computed: {
-    ...mapGetters(["cartGetter"]),
+    ...mapGetters(["cartGetter",'cartCounts']),
   },
 };
 </script>
@@ -140,8 +140,8 @@ export default {
     top: -2px;
     right: -6px;
     color: white;
-    width: 1rem;
-    height: 1rem;
+    width: 1.2rem;
+    height: 1.1rem;
     text-align: center;
     border-radius: 50%;
     background-color: #dc2840;

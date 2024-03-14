@@ -41,13 +41,13 @@ export default {
   name: "bigCard",
   data() {
     return {
-        // localGoodsArray: []
+        //localGoodsArrayIn: [],
         SelectedColor: ''
     }
   },
   methods: {
     ...mapActions(['addToCart']),
-    ...mapActions('goods',['getGoodById']),
+    ...mapActions('goods',['getGoods','getDiscounts','getGoodById']),
     add_To_Cart() {
       this.addToCart({ ...this.localGoodsArray, quantity: 1, color: this.SelectedColor });
     },
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapState('goods', ['localGoodsArray']),
-    ...mapGetters('goods',['GET_GOOD_BY_ID','GET_INSTOCK_BY_ID','GET_DISCOUNT_BY_ID']),
+    ...mapGetters('goods',['GET_INSTOCK_BY_ID','GET_DISCOUNT_BY_ID']),
     inStockOrder() {
       let inStockOrderText;
       if (this.GET_INSTOCK_BY_ID(this.localGoodsArray.id) == "order0") {
@@ -89,11 +89,30 @@ export default {
             'color3'    : this.SelectedColor == 'purple',
             'color4'    : this.SelectedColor == 'grey'
         }
-    }
+    },
+    selectedGood() {
+    return this.localGoodsArray;
   },
-  mounted() {
-    this.getGoodById(this.$route.params.id);
+  },
+  //Получилось сделать чтобы карточка открывалась в новом окне с данными. Дело было в асинхронности. То есть 
+  //мутация, которая получала карточку срабатывала раньше чем успевал заполнится основной массив по товарам.
+async mounted() {
+  try {
+    await this.getGoods();
+    await this.getDiscounts();
+    await this.getGoodById(this.$route.params.id);
+  } catch (error) {
+    console.error('Ошибка при загрузке данных:', error);
   }
+}
+  // async mounted() {
+  //   this.getGoods();
+  //   this.getDiscounts();
+  //   console.log('Я смонтирован: ' + this.$route.params.id);
+  //   this.getGoodById(this.$route.params.id);
+  //   // this.localGoodsArrayIn = this.selectedGood;
+  //   // console.log(this.localGoodsArrayIn + 'Desc: ' + this.localGoodsArrayIn.description);
+  // }
 };
 </script>
 

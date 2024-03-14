@@ -29,6 +29,21 @@ export default createStore({
         return (sum + item.price * item.quantity);
       },0);
       return totalSum;
+    },
+    cartCounts(state) {
+        // Вычисляем общее количество товаров
+        return state.cartArray.reduce((total, item) => total + item.quantity, 0);
+    },
+    cartCountItem(state) {
+      return function(itemid) {
+        const cartItemIndex = state.cartArray.findIndex((item) => item.id === itemid);
+        if (cartItemIndex !== -1) {
+          return state.cartArray[cartItemIndex].quantity
+        }
+        else {
+          return 0
+        }
+      }
     }
   },
   mutations: {
@@ -38,7 +53,7 @@ export default createStore({
       if (state.cartArray.length) {
         let isExists = false;
         state.cartArray.map((item) => {
-          if (item.id === payload.id) {
+          if (item.id === payload.id && item.color === payload.color) {
             isExists = true;
             item.quantity++;
             item.color = payload.color;

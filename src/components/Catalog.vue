@@ -14,14 +14,9 @@
   <!-- <p>Length: {{ goods.gotGoods.length }}</p> -->
   <!-- <p>isLoading: {{ goods.isLoading }}</p> -->
   <div class="loading" v-if="!goods.isLoading">Загрузка...</div>
-  <div class="catalog">
-    <!-- подумать над v-show v-if -->
-    <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length == 0" v-for="goods in goods.gotGoods" :key="goods.id" :products="goods" >
-      <!-- <template #instock>
-        <p>{{ goods.gotDiscounts[0].percent }}</p>
-      </template> -->
-    </vCatalogItem>
-    <vCatalogItem v-if="goods.isLoading" v-show="filteredArray.length != 0" v-for="goods in filteredArray" :key="goods.id" :products="goods" >
+  <div class="catalog" v-if="goods.isLoading">
+
+    <vCatalogItem v-for="goods in currentGoodsArray" :key="goods.id" :products="goods" >
 
     </vCatalogItem>
 
@@ -47,6 +42,9 @@ export default {
         const DistinctCategory = new Set(this.goods.gotGoods.map(item => item.category));
         const CategoryList = Array.from(DistinctCategory);
         return CategoryList;
+    },
+    currentGoodsArray() {
+      return this.filteredArray.length > 0 ? this.filteredArray : this.goods.gotGoods;
     }
   },
   methods: {
@@ -60,8 +58,9 @@ export default {
         this.filteredArray = result;
     },
     resetFilter() {
-        this.filteredArray.splice(0,this.filteredArray.length);
-        this.SelectedCategory = '';
+      this.filteredArray = [];
+        // this.filteredArray.splice(0,this.filteredArray.length);
+        // this.SelectedCategory = '';
     },
 
  

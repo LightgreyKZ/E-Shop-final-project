@@ -2,7 +2,7 @@
   <h2>Моя корзина</h2>
   <div class="cart__container">
     <div class="cart__container_cart">
-      <div class="cart__container_delselected">
+      <div class="cart__container_delselected" v-if="cartArray.length">
         <input
           class="cart__container_delselected-checkbox"
           type="checkbox"
@@ -21,7 +21,7 @@
         v-for="item in cartArray"
         :key="item.id"
         :cartItemArray="item"
-        :selected="selectAll"
+        :selected="selectAll" 
         @SelectItemInCart="toggleSelect"
       >
       </vCartItem>

@@ -48,6 +48,7 @@ export default {
     },
     mutations: {
         SET_GOODS(state, payload) {
+            console.log('Я SET_GOODS');
             state.gotGoods = payload;
             //сортировка массива по категориям
             state.gotGoods.sort((a,b) => {
@@ -63,15 +64,19 @@ export default {
             state.isLoading = true;
         },
         SET_DISCOUNTS(state, payload) {
+            console.log('Я SET_DISCOUNTS');
             state.gotDiscounts = payload;
         },
         //Получаем 1 элемент массива товаров для карточки детального описания (CardView)
         GET_GOOD_BY_ID(state, payload) {
-                
+            
+            console.log('Я внутри мутации GET_GOOD_BY_ID: ' + payload);
+            // console.log(state.gotGoods);
                 const indexItem = state.gotGoods.findIndex((item) => item.id == payload);
+                console.log('indexItem который я нашел таков: ' + indexItem);
                 if (indexItem !== -1) {
-                   state.localGoodsArray = state.gotGoods[indexItem]; 
-                //    return this.localGoodsArray;
+                  state.localGoodsArray = state.gotGoods[indexItem]; 
+                  // return state.gotGoods[indexItem];
                 }
         }
 
@@ -101,8 +106,10 @@ export default {
                 alert('Ошибка при получении списка скидок! Нужно запустить json-server: `npm install -g json-server`, затем json-server src/data/dis.json')
             }
         },
-        getGoodById({commit}, payload) {
-            commit('GET_GOOD_BY_ID', payload);
+        async getGoodById({commit}, payload) {
+            console.log('Я внутри экшена getGoodById: ' + payload);
+            await commit('GET_GOOD_BY_ID', payload);
+            
         }
         // getDiscountsByCategory({commit}, payload) {
         //     commit('GET_DISCOUNT_BY_CATEGORY', payload)
