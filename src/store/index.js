@@ -13,38 +13,46 @@ export default createStore({
     },
     //Наличие в корзине
     isItemInCart(state) {
-      return function(itemid) {
-        const cartItemIndex = state.cartArray.findIndex((item) => item.id === itemid);
+      return function (itemid) {
+        const cartItemIndex = state.cartArray.findIndex(
+          (item) => item.id === itemid
+        );
         if (cartItemIndex !== -1) {
-          return true
+          return true;
+        } else {
+          return false;
         }
-        else {
-          return false
-        }
-      }
+      };
     },
     //Сумма товаров в корзине
     cartTotalSum(state) {
-      const totalSum = state.cartArray.reduce((sum,item) => {
-        return (sum + item.price * item.quantity);
-      },0);
+      const totalSum = state.cartArray.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+      }, 0);
       return totalSum;
     },
     cartCounts(state) {
-        // Вычисляем общее количество товаров
-        return state.cartArray.reduce((total, item) => total + item.quantity, 0);
+      // Вычисляем общее количество товаров
+      return state.cartArray.reduce((total, item) => total + item.quantity, 0);
     },
     cartCountItem(state) {
-      return function(itemid) {
-        const cartItemIndex = state.cartArray.findIndex((item) => item.id === itemid);
-        if (cartItemIndex !== -1) {
-          return state.cartArray[cartItemIndex].quantity
-        }
-        else {
-          return 0
-        }
-      }
-    }
+      return function (itemid) {
+        return state.cartArray.reduce((total, item) => {
+          if (item.id === itemid) {
+            return total + item.quantity;
+          }
+          return total;
+        }, 0);
+        // const cartItemIndex = state.cartArray.findIndex(
+        //   (item) => item.id === itemid
+        // );
+        // if (cartItemIndex !== -1) {
+        //   return state.cartArray[cartItemIndex].quantity;
+        // } else {
+        //   return 0;
+        // }
+      };
+    },
   },
   mutations: {
     //ДОБАВЛЕНИЕ В КОРЗИНУ
@@ -97,7 +105,7 @@ export default createStore({
       if (state.favArray.length) {
         let isExistsFav = false;
         state.favArray.map((itemfav) => {
-          if (itemfav.id === payload.id) {
+          if (itemfav.id === payload.id && itemfav.color === payload.color) {
             isExistsFav = true;
             return {};
           }
@@ -113,14 +121,15 @@ export default createStore({
     DEL_FROM_FAV(state, payload) {
       //Удаляем элемент из избранного. Ищем индекс переданного в payload id и удаляем 1 элемент.
       state.favArray.splice(
-        state.favArray.findIndex((item) => item.id === payload.id),1
-        );
+        state.favArray.findIndex((item) => item.id === payload.id || item.color !== payload.color),
+        1
+      );
     },
     ADD_TO_SELECTED_ITEMS(state, payload) {
       if (state.selectedItems.length) {
         let isExistsSel = false;
         state.selectedItems.map((itemsel) => {
-          if (itemsel.id === payload.id) {
+          if (itemsel.id === payload.id && itemsel.color === payload.color) {
             isExistsSel = true;
             return {};
           }
@@ -128,25 +137,37 @@ export default createStore({
         if (!isExistsSel) {
           state.selectedItems.push(payload);
         }
-      }
-      else {
+      } else {
         state.selectedItems.push(payload);
       }
     },
     DEL_FROM_SELECTED_ITEMS(state, payload) {
-      state.selectedItems.splice(state.selectedItems.findIndex((item) => item.id === payload.id),1);
+      // let index = state.selectedItems.findIndex((item) => {
+      //   console.log(item.id + ' - ' + payload.id);
+      //   console.log(item.color + ' - ' + payload.color);
+      //   (item.id !== payload.id || item.color !== payload.color)
+      // });
+      // console.log(index);
+      // state.selectedItems.splice(index,1);
+      state.selectedItems = state.selectedItems.filter(
+        (item) => item.id !== payload.id || item.color !== payload.color
+      );
     },
     DEL_SELECTED_ITEMS_FROM_CART(state) {
-      // state.cartArray = state.cartArray.filter((item) => item.id === 111);
-      // state.selectedItems = [];
-      // let rrr = state.selectedItems.forEach(element => {element.id})
       for (let i = 0; i < state.selectedItems.length; i++) {
-        state.cartArray = state.cartArray.filter((item) => item.id !== state.selectedItems[i].id)
-        // state.cartArray.splice((state.cartArray.findIndex((item) => item.id == state.selectedItems[i].id)),1)
-        // console.log('id:' + state.selectedItems[i].id);
+        // console.log('Я тут, готов удалят выбранные элементы, итерация: ' + i);
+        // console.log('Массив выбранных элементов: ' + state.selectedItems[i]);
+        state.cartArray = state.cartArray.filter(
+          (item) =>
+            item.id !== state.selectedItems[i].id ||
+            item.color !== state.selectedItems[i].color
+        );
       }
       state.selectedItems = [];
-    }
+    },
+    DEL_ALL_FROM_SELECTED(state) {
+      state.selectedItems = [];
+    },
   },
   actions: {
     //ДОБАВЛЕНИЕ В КОРЗИНУ
@@ -170,15 +191,18 @@ export default createStore({
     decQuantityInCart({ commit }, payload) {
       commit("DEC_QUANTITY_IN_CART", payload);
     },
-    addToSelect({commit}, payload) {
+    addToSelect({ commit }, payload) {
       commit("ADD_TO_SELECTED_ITEMS", payload);
     },
-    delFromSelect({commit}, payload) {
+    delFromSelect({ commit }, payload) {
       commit("DEL_FROM_SELECTED_ITEMS", payload);
     },
-    delSelectedItemsFromCart({commit}) {
+    delAllFromSelect({ commit }) {
+      commit("DEL_ALL_FROM_SELECTED");
+    },
+    delSelectedItemsFromCart({ commit }) {
       commit("DEL_SELECTED_ITEMS_FROM_CART");
-    }
+    },
   },
   modules: {
     goods,

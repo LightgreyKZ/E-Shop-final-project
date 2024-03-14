@@ -60,7 +60,7 @@ export default {
     resetFilter() {
       this.filteredArray = [];
         // this.filteredArray.splice(0,this.filteredArray.length);
-        // this.SelectedCategory = '';
+      this.SelectedCategory = '';
     },
 
  

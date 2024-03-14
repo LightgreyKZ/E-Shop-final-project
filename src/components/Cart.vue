@@ -48,27 +48,28 @@ export default {
     ...mapState(["cartArray", "selectedItems"]),
   },
   methods: {
-    ...mapActions(["addToSelect", "delFromSelect", "delSelectedItemsFromCart"]),
+    ...mapActions(["addToSelect", "delFromSelect", "delAllFromSelect","delSelectedItemsFromCart"]),
     toggleSelectAll() {
       if (this.selectAll) {
         // Выбрать все элементы
         // this.addToSelect(this.cartArray.forEach(item => item.id));
         this.cartArray.forEach((element) => {
-          this.addToSelect({ id: element.id });
+          this.addToSelect({ id: element.id, color: element.color });
         });
       } else {
         // Снять выбор со всех элементов
         this.cartArray.forEach((element) => {
-          this.delFromSelect({ id: element.id });
+          this.delFromSelect({ id: element.id, color: element.color });
         });
       }
     },
     //Метод для выбора элементов корзины из Cart-item
-    toggleSelect(idFromCart, isSelFromCart) {
+    toggleSelect(idFromCart, isSelFromCart, colorFromCart) {
       if (isSelFromCart) {
-        this.addToSelect({ id: idFromCart });
+        this.addToSelect({ id: idFromCart, color: colorFromCart });
       } else {
-        this.delFromSelect({ id: idFromCart });
+        // console.log('1.Перед удалением из выделенного: ' + idFromCart + ' - ' +colorFromCart);
+        this.delFromSelect({ id: idFromCart, color: colorFromCart });
       }
     },
     deleteSelectedItems() {
@@ -80,6 +81,9 @@ export default {
     vCartItem,
     vCartTotal,
   },
+  mounted() {
+    this.delAllFromSelect();
+  }
 };
 </script>
 

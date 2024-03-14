@@ -133,7 +133,7 @@ export default {
   mounted() {
     //ищем был ли добавлен элемент в избранное ранее
     const isFoundFav = this.favArray.find(
-      (item) => item.id === this.cartItemArray.id
+      (item) => item.id === this.cartItemArray.id && item.color === this.cartItemArray.color
     );
     if (isFoundFav) {
       this.isFavorite = true;
@@ -156,6 +156,7 @@ export default {
       // this.delFromCart({ id: this.cartItemArray.id });
       //upd. Переделал вот так, потому что в сторе все равно смотрю на payload.id, а тут неважно, что передаю 1 элемент целиком:
       this.delFromCart(this.cartItemArray);
+      this.delFromSelect(this.cartItemArray);
     },
     addFavorite() {
       //реализовал переключение между статусами в избранном/удаление из избранного
@@ -163,7 +164,7 @@ export default {
       if (this.isFavorite) {
         //добавляем в стор инфу об id сразу со структурой в виде объекта.
         //Upd. Тут надо именно так, потому что массив fav только 1 поле id и содержит
-        this.addToFav({ id: this.cartItemArray.id });
+        this.addToFav({ id: this.cartItemArray.id, color: this.cartItemArray.color });
       } else {
         this.delFav(this.cartItemArray);
       }
@@ -176,7 +177,7 @@ export default {
       this.decQuantityInCart(this.cartItemArray);
     },
     selectItem() {
-      this.$emit("SelectItemInCart", this.cartItemArray.id, this.isSelect);
+      this.$emit("SelectItemInCart", this.cartItemArray.id, this.isSelect, this.cartItemArray.color);
       // if (this.isSelect) {
       //   this.addToSelect({ id: this.cartItemArray.id });
       // }

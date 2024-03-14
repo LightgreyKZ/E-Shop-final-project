@@ -19,7 +19,7 @@
         <p class="cardPrice" :class="{ redPrice: percentDiscount }">
             {{ products.price - (products.price * percentDiscount/100).toFixed(2) }}&#36;
         </p>
-        <span class="inCart" v-if="isInCart">В корзине: {{ cartCountItemLocal }}</span>
+        <span class="inCart" v-if="isInCart" >В корзине: {{ cartCountItemLocal }}</span>
         <button class="addToCart" @click="add_To_Cart()">+</button>
         <!-- <p v-if="percentDiscount">Процент скидки: {{ percentDiscount }} %</p> -->
       </div>
@@ -43,7 +43,7 @@ export default {
     ...mapActions(["addToCart"]),
     add_To_Cart() {
       //над этим просидел часов 5: (чтобы добавить кол-во в корзину)
-      this.addToCart({ ...this.products, quantity: 1, color: '' });
+      this.addToCart({ ...this.products, quantity: 1, color: 'default' });
     },
   },
   computed: {
